@@ -1,1 +1,3 @@
-# python_for_water_weather_climate
+# Python for research in Water, Weather, and Climate
+
+
