@@ -6,7 +6,7 @@
 	},
 	"features": {
 		"ghcr.io/devcontainers/features/anaconda:1": {},
-		"ghcr.io/rocker-org/devcontainer-features/miniforge:0": {},
+		"ghcr.io/devcontainers/features/conda:1": {},
 		"ghcr.io/devcontainers-contrib/features/black:1": {},
 		"ghcr.io/devcontainers-contrib/features/mypy:1": {},
 		"ghcr.io/devcontainers-contrib/features/pylint:1": {}
