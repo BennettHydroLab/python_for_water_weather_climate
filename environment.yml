@@ -6,7 +6,5 @@ dependencies:
   - netcdf4
   - zarr
   - numpy
-  - geoviews
   - dask
   - matplotlib
-  - scikit-learn
