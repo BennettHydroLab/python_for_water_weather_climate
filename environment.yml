@@ -1,3 +1,4 @@
+name: pywwc
 channels:
   - conda-forge
   - defaults
@@ -8,3 +9,18 @@ dependencies:
   - numpy
   - dask
   - matplotlib
+  - fsspec
+  - aiohttp
+  - pooch
+  - fiona
+  - pyogrio
+  - geopandas
+  - rioxarray
+  - cartopy
+  - holoviews
+  - geoviews
+  - jupyter
+  - jupyterlab
+  - pip
+  - pip:
+    - jupyterlab-myst
