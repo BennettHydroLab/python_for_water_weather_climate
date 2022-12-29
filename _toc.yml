@@ -3,4 +3,10 @@ format: jb-book
 root: README
 chapters:
 - file: course_content/module_1_intro_to_python/1_python_introduction.ipynb
-- file: course_content/module_N_intro_to_xarray/xarray_exercises_pt2.ipynb
+- file: course_content/module_2_numpy_and_matplotlib/1_intro_to_numpy.ipynb
+- file: course_content/module_2_numpy_and_matplotlib/2_intro_to_matplotlib.ipynb
+- file: course_content/module_3_pandas_and_data_handling/1_intro_to_pandas.ipynb
+- file: course_content/module_3_pandas_and_data_handling/2_apis_for_data_handling.ipynb
+- file: course_content/module_4_modeling_with_scikit_learn/1_intro_to_sklearn.ipynb
+- file: course_content/module_5_geopandas_for_gis/1_intro_to_geopandas.ipynb
+- file: course_content/module_6_xarray_and_big_data/1_intro_to_xarray.ipynb
