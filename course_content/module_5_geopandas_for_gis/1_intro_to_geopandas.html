@@ -1,0 +1,870 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Introduction to GIS in python with geopandas &#8212; Python for water, weather, and climate science</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Python for water, weather, and climate science</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    Python for research in Water, Weather, and Climate
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../module_1_intro_to_python/1_python_introduction.html">
+   Welcome to Python for Water, Weather, and Climate
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/course_content/module_5_geopandas_for_gis/1_intro_to_geopandas.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/course_content/module_5_geopandas_for_gis/1_intro_to_geopandas.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Introduction to GIS in python with geopandas</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-gis-in-python-with-geopandas">
+<h1>Introduction to GIS in python with <code class="docutils literal notranslate"><span class="pre">geopandas</span></code><a class="headerlink" href="#introduction-to-gis-in-python-with-geopandas" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+import geopandas as gpd
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;numpy&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>This contains the geometric data for the state of Arizona
+The format is an ESRI shapefile, but there are other ways
+to define geospatial data, with the most popular alternative
+probably being a “geojson” file. Anyways, we can just open
+this up with the <code class="docutils literal notranslate"><span class="pre">gpd.read_file</span></code> method, and it will automatically
+figure out that it’s a shapefile.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>az = gpd.read_file(
+    &#39;/vsicurl/https://github.com/HAS-Tools-Fall2022&#39;
+    &#39;/Course-Materials22/raw/main/data/arizona_shapefile&#39;
+    &#39;/tl_2016_04_cousub.shp&#39;
+)
+print(type(az))
+az.head()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>STATEFP</th>
+      <th>COUNTYFP</th>
+      <th>COUSUBFP</th>
+      <th>COUSUBNS</th>
+      <th>GEOID</th>
+      <th>NAME</th>
+      <th>NAMELSAD</th>
+      <th>LSAD</th>
+      <th>CLASSFP</th>
+      <th>MTFCC</th>
+      <th>CNECTAFP</th>
+      <th>NECTAFP</th>
+      <th>NCTADVFP</th>
+      <th>FUNCSTAT</th>
+      <th>ALAND</th>
+      <th>AWATER</th>
+      <th>INTPTLAT</th>
+      <th>INTPTLON</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>04</td>
+      <td>005</td>
+      <td>91198</td>
+      <td>01934931</td>
+      <td>0400591198</td>
+      <td>Flagstaff</td>
+      <td>Flagstaff CCD</td>
+      <td>22</td>
+      <td>Z5</td>
+      <td>G4040</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>S</td>
+      <td>12277307143</td>
+      <td>38107703</td>
+      <td>+35.1066114</td>
+      <td>-111.3662497</td>
+      <td>POLYGON ((-112.13370 35.85596, -112.13368 35.8...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>04</td>
+      <td>005</td>
+      <td>91838</td>
+      <td>01934953</td>
+      <td>0400591838</td>
+      <td>Kaibab Plateau</td>
+      <td>Kaibab Plateau CCD</td>
+      <td>22</td>
+      <td>Z5</td>
+      <td>G4040</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>S</td>
+      <td>7229190740</td>
+      <td>29332139</td>
+      <td>+36.5991097</td>
+      <td>-112.1368033</td>
+      <td>POLYGON ((-112.66039 36.53941, -112.66033 36.5...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>04</td>
+      <td>005</td>
+      <td>91683</td>
+      <td>01934950</td>
+      <td>0400591683</td>
+      <td>Hualapai</td>
+      <td>Hualapai CCD</td>
+      <td>22</td>
+      <td>Z5</td>
+      <td>G4040</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>S</td>
+      <td>2342334297</td>
+      <td>3772175</td>
+      <td>+35.9271665</td>
+      <td>-113.1170408</td>
+      <td>POLYGON ((-113.35416 36.04097, -113.35416 36.0...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>04</td>
+      <td>023</td>
+      <td>92295</td>
+      <td>01934961</td>
+      <td>0402392295</td>
+      <td>Nogales</td>
+      <td>Nogales CCD</td>
+      <td>22</td>
+      <td>Z5</td>
+      <td>G4040</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>S</td>
+      <td>1763427522</td>
+      <td>2397821</td>
+      <td>+31.4956008</td>
+      <td>-111.0171349</td>
+      <td>POLYGON ((-111.36689 31.50009, -111.36687 31.5...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>04</td>
+      <td>023</td>
+      <td>92550</td>
+      <td>01934966</td>
+      <td>0402392550</td>
+      <td>Patagonia</td>
+      <td>Patagonia CCD</td>
+      <td>22</td>
+      <td>Z5</td>
+      <td>G4040</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>S</td>
+      <td>1440185727</td>
+      <td>690225</td>
+      <td>+31.5664619</td>
+      <td>-110.6410279</td>
+      <td>POLYGON ((-110.96273 31.68695, -110.96251 31.6...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Just like a regular pandas dataframe the geodataframe
+has a bunch of helper methods for you to be able to
+see what’s in the data. As usual, doing <code class="docutils literal notranslate"><span class="pre">df.head()</span></code>
+will give a quick preview of what’s inside it.</p>
+<p>NOTE: One important thing, if you scroll over the the
+far right column in the printout you’ll see that
+there is a column for the geometry, which defines
+the shapes of the vector data.</p>
+<p>You can even see the individual polygons in this case by
+indexing the geometry directly.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>az[&#39;geometry&#39;].iloc[0]
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/1_intro_to_geopandas_5_0.svg" src="../../_images/1_intro_to_geopandas_5_0.svg" /></div>
+</div>
+<p>But, more importantly, it’s easy to plot things! See
+here we can just call the <code class="docutils literal notranslate"><span class="pre">.plot()</span></code> function and that
+will automatically show you all of the geometries.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>az.plot()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: &gt;
+</pre></div>
+</div>
+<img alt="../../_images/1_intro_to_geopandas_7_1.png" src="../../_images/1_intro_to_geopandas_7_1.png" />
+</div>
+</div>
+<p>Further, you can plot the data in the columns
+in an easy way by adding <code class="docutils literal notranslate"><span class="pre">column='COLUMN_NAME'</span></code>
+to the plot call. Also, adding <code class="docutils literal notranslate"><span class="pre">legend=True</span></code>
+will get you a colorbar. Here I’m just plotting
+the area of the land in each of the polygons.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>az.plot(column=&#39;ALAND&#39;, legend=True)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: &gt;
+</pre></div>
+</div>
+<img alt="../../_images/1_intro_to_geopandas_9_1.png" src="../../_images/1_intro_to_geopandas_9_1.png" />
+</div>
+</div>
+<p>A minor aside, but you could also get this
+information from the geometry directly - see here.
+I’ll also change the colormap with <code class="docutils literal notranslate"><span class="pre">cmap='turbo'</span></code>
+just to spice things up.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>az[&#39;area&#39;] = az.geometry.area
+az.plot(column=&#39;area&#39;, legend=True, cmap=&#39;turbo&#39;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_261198/4063054153.py:1: UserWarning: Geometry is in a geographic CRS. Results from &#39;area&#39; are likely incorrect. Use &#39;GeoSeries.to_crs()&#39; to re-project geometries to a projected CRS before this operation.
+
+  az[&#39;area&#39;] = az.geometry.area
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: &gt;
+</pre></div>
+</div>
+<img alt="../../_images/1_intro_to_geopandas_11_2.png" src="../../_images/1_intro_to_geopandas_11_2.png" />
+</div>
+</div>
+<p>Next up, we can also pull in the GAGES-II dataset,
+which is a USGS product with the acronym “Geospatial
+Attributes of Gages for Evaluating Streamflow” and
+contains data from over 9000 located across the US.
+This shapefile only contains some of the attributes,
+but does not actually contain the streamflow timeseries.
+We’ll get to that in your homework.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>gages = gpd.read_file(
+     &#39;/vsicurl/https://github.com/HAS-Tools-Fall2022&#39;
+     &#39;/Course-Materials22/raw/main/data/gagesii_shapefile/&#39;
+     &#39;gagesII_9322_sept30_2011.shp&#39;   
+)
+gages.head()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>STAID</th>
+      <th>STANAME</th>
+      <th>CLASS</th>
+      <th>AGGECOREGI</th>
+      <th>DRAIN_SQKM</th>
+      <th>HUC02</th>
+      <th>LAT_GAGE</th>
+      <th>LNG_GAGE</th>
+      <th>STATE</th>
+      <th>HCDN_2009</th>
+      <th>ACTIVE09</th>
+      <th>FLYRS1900</th>
+      <th>FLYRS1950</th>
+      <th>FLYRS1990</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>01011000</td>
+      <td>Allagash River near Allagash, Maine</td>
+      <td>Non-ref</td>
+      <td>NorthEast</td>
+      <td>3186.8440</td>
+      <td>01</td>
+      <td>47.069611</td>
+      <td>-69.079544</td>
+      <td>ME</td>
+      <td>None</td>
+      <td>yes</td>
+      <td>78.0</td>
+      <td>60.0</td>
+      <td>20.0</td>
+      <td>POINT (2027371.849 2964479.789)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>01013500</td>
+      <td>Fish River near Fort Kent, Maine</td>
+      <td>Ref</td>
+      <td>NorthEast</td>
+      <td>2252.6960</td>
+      <td>01</td>
+      <td>47.237394</td>
+      <td>-68.582642</td>
+      <td>ME</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>85.0</td>
+      <td>60.0</td>
+      <td>20.0</td>
+      <td>POINT (2058479.303 2992966.016)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>01015800</td>
+      <td>Aroostook River near Masardis, Maine</td>
+      <td>Non-ref</td>
+      <td>NorthEast</td>
+      <td>2313.7550</td>
+      <td>01</td>
+      <td>46.523003</td>
+      <td>-68.371764</td>
+      <td>ME</td>
+      <td>None</td>
+      <td>yes</td>
+      <td>51.0</td>
+      <td>51.0</td>
+      <td>19.0</td>
+      <td>POINT (2096533.991 2921785.543)</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>01016500</td>
+      <td>MACHIAS RIVER NEAR ASHLAND, ME</td>
+      <td>Non-ref</td>
+      <td>NorthEast</td>
+      <td>847.7721</td>
+      <td>01</td>
+      <td>46.628311</td>
+      <td>-68.434792</td>
+      <td>ME</td>
+      <td>None</td>
+      <td>None</td>
+      <td>32.0</td>
+      <td>32.0</td>
+      <td>0.0</td>
+      <td>POINT (2088548.849 2931578.094)</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>01017000</td>
+      <td>Aroostook River at Washburn, Maine</td>
+      <td>Non-ref</td>
+      <td>NorthEast</td>
+      <td>4278.9070</td>
+      <td>01</td>
+      <td>46.777294</td>
+      <td>-68.157194</td>
+      <td>ME</td>
+      <td>None</td>
+      <td>yes</td>
+      <td>79.0</td>
+      <td>60.0</td>
+      <td>20.0</td>
+      <td>POINT (2104213.711 2953507.477)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>As before, we can plot this right up. Now here note that
+we have points rather than polygons, so a different kind
+of vector data. I modified some of the plot attributes
+just to make things prettier. Here you can see the full
+US, including Alaska, Hawaii, and Puerto Rico.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>gages.plot(markersize=1, color=&#39;goldenrod&#39;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: &gt;
+</pre></div>
+</div>
+<img alt="../../_images/1_intro_to_geopandas_15_1.png" src="../../_images/1_intro_to_geopandas_15_1.png" />
+</div>
+</div>
+<p>Let’s see if we can plot the GAGES data along with the
+Arizona shapefile. Just to start off here, it might be
+worth looking at the axis labels on the previous plots.
+This is where the CRS stuff comes into play.
+Now, when you run this, you might ask: where’s Arizona?
+Great question - but let’s jump down to the next cell to
+figure out what happened.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ax = gages.plot(markersize=1, color=&#39;goldenrod&#39;)
+az.plot(ax=ax, color=&#39;crimson&#39;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: &gt;
+</pre></div>
+</div>
+<img alt="../../_images/1_intro_to_geopandas_17_1.png" src="../../_images/1_intro_to_geopandas_17_1.png" />
+</div>
+</div>
+<p>Here I’ve added some bells and whistles to debug the
+behavior from above. Basically I added an <code class="docutils literal notranslate"><span class="pre">edgecolor</span></code>
+and increased the <code class="docutils literal notranslate"><span class="pre">linewidth</span></code> so we can see where
+the Arizona shapefile pops up - and it’s somewhere
+south of Texas… clearly wrong. So what’s up?
+It’s the CRS. The Arizona shapefile has a lat/lon
+projection, and the GAGES shapefile is based on
+meters, so they don’t line up right. How do we fix this?
+See the answer below!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ax = gages.plot(markersize=1, color=&#39;goldenrod&#39;)
+az.plot(
+    ax=ax, 
+    color=&#39;crimson&#39;, 
+    edgecolor=&#39;crimson&#39;, 
+    linewidth=10
+)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: &gt;
+</pre></div>
+</div>
+<img alt="../../_images/1_intro_to_geopandas_19_1.png" src="../../_images/1_intro_to_geopandas_19_1.png" />
+</div>
+</div>
+<p>To get things lined up we can simply do a coordinate
+transformation. This is where geopandas comes in and
+helps out a lot. We can simply take the CRS of one of
+the shapefiles and project the other one to the same
+CRS. I’m putting the GAGES data onto the AZ CRS here
+just because I find lat/lon to be more intuitive.
+Then, it’s easy enough to just plot it all together!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>gages = gages.to_crs(az.crs)
+ax = az.plot(color=&#39;crimson&#39;)
+gages.plot(markersize=1, color=&#39;goldenrod&#39;, ax=ax, alpha=0.2)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: &gt;
+</pre></div>
+</div>
+<img alt="../../_images/1_intro_to_geopandas_21_1.png" src="../../_images/1_intro_to_geopandas_21_1.png" />
+</div>
+</div>
+<p>Okay, next step you might want to do is just pull out
+the GAGES data that is inside of Arizona. This is really
+easy again thanks to geopandas with the <code class="docutils literal notranslate"><span class="pre">clip</span></code> function.
+Then, we’ll just plot the thing up!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>az_gages = gages.clip(az)
+ax = az.plot(color=&#39;lightgrey&#39;, edgecolor=&#39;white&#39;)
+az_gages.plot(ax=ax, color=&#39;crimson&#39;, markersize=5)
+plt.title(&#39;Gages II data in Arizona&#39;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Gages II data in Arizona&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/1_intro_to_geopandas_23_1.png" src="../../_images/1_intro_to_geopandas_23_1.png" />
+</div>
+</div>
+<p>Great, that’s all I have for you here! There will be
+more exercises combining this with stuff that you’ve
+seen for pulling in the streamflow data from USGS.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./course_content/module_5_geopandas_for_gis"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Andrew Bennett<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

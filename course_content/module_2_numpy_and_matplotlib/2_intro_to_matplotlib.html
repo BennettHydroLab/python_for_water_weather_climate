@@ -1,0 +1,634 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Getting started with matplotlib &#8212; Python for water, weather, and climate science</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Python for water, weather, and climate science</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    Python for research in Water, Weather, and Climate
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../module_1_intro_to_python/1_python_introduction.html">
+   Welcome to Python for Water, Weather, and Climate
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/course_content/module_2_numpy_and_matplotlib/2_intro_to_matplotlib.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/course_content/module_2_numpy_and_matplotlib/2_intro_to_matplotlib.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Getting started with matplotlib</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="getting-started-with-matplotlib">
+<h1>Getting started with <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code><a class="headerlink" href="#getting-started-with-matplotlib" title="Permalink to this headline">#</a></h1>
+<p>Matplotlib is the most used plotting package
+in python. It was designed to mimic the plotting
+syntax and functionality from Matlab, hence
+the name matplotlib.</p>
+<p>Just like when we imported numpy “as np”
+it is standard to have two separate imports
+with simplified aliases</p>
+<p>The base <code class="docutils literal notranslate"><span class="pre">mpl</span></code> import is used for high level
+settings like setting a default figure or font
+size. The import of <code class="docutils literal notranslate"><span class="pre">plt</span></code> provides the main
+interface to the actual plotting functions.</p>
+<p>To begin, we define the same air pressure
+function as well as import numpy. Numpy and
+matplotlib have been designed to work very
+well together</p>
+<p>Just like with numpy, matplotlib is a very
+large and general purpose library so we won’t
+be able to cover everything.</p>
+<p>The introductory tutorials can be  found here:
+<a class="reference external" href="https://matplotlib.org/stable/tutorials/introductory/index.html">https://matplotlib.org/stable/tutorials/introductory/index.html</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import time
+import numpy as np
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+
+def air_pressure_at_height(h, T0=273):
+    p0 = 101325      # reference pressure in pascals
+    M = 0.02896968   # molar mass of air kg/mol
+    g = 9.81         # gravity m/s^2
+    R0 = 8.314462618 # gas constant J/(mol·K) 
+    T = T0           # temp in kelvin
+
+    ratio = -(g * h * M) / (R0 * T)
+    p_h = p0 * np.exp(ratio)
+    return p_h
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">time</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;numpy&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Okay, our first plot will be the variation
+of the air pressure with respect to elevation.
+To do this, we will first create our two arrays,
+one for the elevations and then we feed that
+into our nice function just like in the previous
+notebook.</p>
+<p>From there we can just use the <code class="docutils literal notranslate"><span class="pre">plt.plot</span></code>
+function to make the plot. Pretty nifty!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>heights = np.arange(0, 20000, 50)
+pressures = air_pressure_at_height(heights)
+
+plt.plot(pressures)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f0f54ff5cd0&gt;]
+</pre></div>
+</div>
+<img alt="../../_images/2_intro_to_matplotlib_3_1.png" src="../../_images/2_intro_to_matplotlib_3_1.png" />
+</div>
+</div>
+<p>Hmmm, something is going on with that x axis.
+It only shows up to 400 but our heights array
+goes to 20,000! What’s going on there? We only
+gave the plot function the pressures, so it knows
+nothing about the heights. By default matplotlib
+will just label the x axis with 0 to N where N
+is the length of the array you passed in to the
+plot function.</p>
+<p>To get both, you can optionally pass in both
+what you want on the x axis <em>and</em> what you
+want on the y axis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.plot(heights, pressures)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f0f4cd5ec10&gt;]
+</pre></div>
+</div>
+<img alt="../../_images/2_intro_to_matplotlib_5_1.png" src="../../_images/2_intro_to_matplotlib_5_1.png" />
+</div>
+</div>
+<p>One problem though. If you gave this plot
+to a colleague they would have no clue what it
+is telling them. To help them out let’s add some
+axis labels. This can be done with the <code class="docutils literal notranslate"><span class="pre">plt.xlabel</span></code>
+and <code class="docutils literal notranslate"><span class="pre">plt.ylabel</span></code> functions. Matplotlib automatically
+knows to put them on the current plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.plot(heights, pressures)
+plt.xlabel(&#39;Height above sea level [m]&#39;)
+plt.ylabel(&#39;Air pressure [pa]&#39;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Air pressure [pa]&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/2_intro_to_matplotlib_7_1.png" src="../../_images/2_intro_to_matplotlib_7_1.png" />
+</div>
+</div>
+<p>Beautiful! But, we’re not done yet. If you’ve looked
+closely at the function for the air pressure you might
+have noticed we added a new argument <code class="docutils literal notranslate"><span class="pre">T0</span></code> with a default
+argument of 273.15. By a default argument we mean that
+if you don’t supply an alternative, it sets that one as
+the value. But we know air pressure is a function of
+temperature and so we might want to see how that affects
+things. Let’s try a few and plot them.</p>
+<p>To do that we just need to run a few new calculations,
+and then call the <code class="docutils literal notranslate"><span class="pre">plt.plot</span></code> function on each of the
+results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>p_273 = air_pressure_at_height(heights)
+p_293 = air_pressure_at_height(heights, T0=293)
+p_313 = air_pressure_at_height(heights, T0=313)
+p_333 = air_pressure_at_height(heights, T0=333)
+
+plt.plot(heights, p_273)
+plt.plot(heights, p_293)
+plt.plot(heights, p_313)
+plt.plot(heights, p_333)
+
+plt.xlabel(&#39;Height above sea level [m]&#39;)
+plt.ylabel(&#39;Air pressure [pa]&#39;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Air pressure [pa]&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/2_intro_to_matplotlib_9_1.png" src="../../_images/2_intro_to_matplotlib_9_1.png" />
+</div>
+</div>
+<p>This is awesome, but we’re back to the fact that
+if you handed this to someone else they would not have
+a way of knowing what the different lines are for.
+We can remedy this by adding <code class="docutils literal notranslate"><span class="pre">label</span></code>s to each of the calls
+to <code class="docutils literal notranslate"><span class="pre">plt.plot</span></code>. Once those have been added we just call
+<code class="docutils literal notranslate"><span class="pre">plt.legend()</span></code> after we are done plotting the lines to
+add it to the figure</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>p_273 = air_pressure_at_height(heights)
+p_293 = air_pressure_at_height(heights, T0=293)
+p_313 = air_pressure_at_height(heights, T0=313)
+p_333 = air_pressure_at_height(heights, T0=333)
+
+plt.plot(heights, p_273, label=&#39;T=273K&#39;)
+plt.plot(heights, p_293, label=&#39;T=293K&#39;)
+plt.plot(heights, p_313, label=&#39;T=313K&#39;)
+plt.plot(heights, p_333, label=&#39;T=333K&#39;)
+
+plt.xlabel(&#39;Height above sea level [m]&#39;)
+plt.ylabel(&#39;Air pressure [pa]&#39;)
+plt.legend()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f0f54e6e7d0&gt;
+</pre></div>
+</div>
+<img alt="../../_images/2_intro_to_matplotlib_11_1.png" src="../../_images/2_intro_to_matplotlib_11_1.png" />
+</div>
+</div>
+<p>A final step on this particular plot. You can use
+all of this functionality in loops so that your code
+is a bit shorter and easier to modify. Let’s look at
+how</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>temps = [273, 293, 313, 333]
+for T in temps:
+    p_temp = air_pressure_at_height(heights, T0=T)
+    plt.plot(heights, p_temp, label=&#39;T=&#39;+str(T)+&#39;K&#39;)
+
+plt.xlabel(&#39;Height above sea level [m]&#39;)
+plt.ylabel(&#39;Air pressure [pa]&#39;)
+plt.legend()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f0f54ef6390&gt;
+</pre></div>
+</div>
+<img alt="../../_images/2_intro_to_matplotlib_13_1.png" src="../../_images/2_intro_to_matplotlib_13_1.png" />
+</div>
+</div>
+<p>Okay, line plots are cool, but what else can
+matplotlib do? Let’s look at images. So for this
+one we’ll first run the air pressure function over
+many different temperatures.</p>
+<p>We then <code class="docutils literal notranslate"><span class="pre">stack</span></code> the results of our loop, which just
+makes the whole thing a numpy array rather than a
+list of numpy arrays. This is so matplotlib can
+interpret what we want.</p>
+<p>QUIZ: What’s the resulting dimension of <code class="docutils literal notranslate"><span class="pre">pressures</span></code>
+after calling np.stack ?</p>
+<p>Finally we call  <code class="docutils literal notranslate"><span class="pre">plt.colorbar</span></code> just so we know what
+the values for the different colors are.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>temps = np.arange(200, 400, 1)
+pressures = []
+for T in temps:
+    p_new = air_pressure_at_height(heights, T0=T)
+    pressures.append(p_new)
+
+# Stack just sticks a list of numpy arrays 
+# together along a new dimension
+pressures = np.stack(pressures)
+ax = plt.imshow(pressures)
+plt.colorbar(
+    fraction=0.02,  # Just shrinking the size of it
+    label=&#39;Pressure [pa]&#39;
+)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x7f0f4cb71210&gt;
+</pre></div>
+</div>
+<img alt="../../_images/2_intro_to_matplotlib_15_1.png" src="../../_images/2_intro_to_matplotlib_15_1.png" />
+</div>
+</div>
+<p>Hmmm, now we’re back to the problem where
+we don’t know what the x and y axes represent.
+To fix this we’ll need to get into a slightly more
+complex way of plotting. This mode requires more code
+but is better for flexibility. For exploratory analysis
+you can usually get away with just calling <code class="docutils literal notranslate"><span class="pre">plt.WHATEVER</span></code>
+but this way of explicitly creating the <code class="docutils literal notranslate"><span class="pre">plt.figure</span></code> is
+usually better for detailed plotting.</p>
+<p>This one is a little bit complicated so it’s okay if
+it doesn’t click right now, but I wanted to show it
+because it is something common to need to make, but
+a bit difficult, so I wanted to provide a reference.
+This took me ~10 mins to re-figure out even though
+I have been using matplotlib since ~2012.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig, ax = plt.subplots()
+
+img = ax.imshow(pressures, cmap=&#39;turbo&#39;)
+fig.colorbar(
+    img, 
+    fraction=0.02,
+    label=&#39;Pressure [pa]&#39;
+)
+
+# Ticks are where the labels are
+# and ticklabels are what the labels are
+xticks = np.arange(25, len(heights), 50)
+ax.set_xticks(xticks)
+ax.set_xticklabels(heights[xticks])
+ax.set_xlabel(&#39;Elevation [m]&#39;)
+
+# We do this for both the x and y dims
+yticks = np.arange(25, len(temps), 50)
+ax.set_yticks(yticks)
+ax.set_yticklabels(temps[yticks])
+ax.set_ylabel(&#39;Temperature [K]&#39;)
+# %%
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Temperature [K]&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/2_intro_to_matplotlib_17_1.png" src="../../_images/2_intro_to_matplotlib_17_1.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./course_content/module_2_numpy_and_matplotlib"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Andrew Bennett<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
