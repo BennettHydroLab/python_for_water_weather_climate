@@ -18,6 +18,9 @@ jobs:
 
     - name: Install jupyter-book via pip
       run: pip install jupyter-book
+      with:
+        python-version: 3.9
+        cache: 'pip' # caching pip dependencies
 
     # Build the book
     - name: Build the book
