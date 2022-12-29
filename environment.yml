@@ -21,6 +21,7 @@ dependencies:
   - geoviews
   - jupyter
   - jupyterlab
+  - jupyter-book
   - pip
   - pip:
     - jupyterlab-myst

@@ -1,0 +1,6 @@
+# In _toc.yml
+format: jb-book
+root: README
+chapters:
+- file: course_content/module_1_intro_to_python/1_python_introduction.ipynb
+- file: course_content/module_N_intro_to_xarray/xarray_exercises_pt2.ipynb
