@@ -342,9 +342,9 @@ title="Print to PDF"
 <h1>Introduction to <code class="docutils literal notranslate"><span class="pre">pandas</span></code><a class="headerlink" href="#introduction-to-pandas" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 </pre></div>
 </div>
 </div>
@@ -371,11 +371,11 @@ I am adding in some extra pieces of code to do some cleanup</p>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df = pd.read_csv(
-    &#39;https://raw.githubusercontent.com/arbennett/&#39;
-    &#39;summa_snow_layering_analysis/master/obs_data/dana_obs.csv&#39;,
-    index_col=0, skipinitialspace=True, parse_dates=True
-)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s1">&#39;https://raw.githubusercontent.com/arbennett/&#39;</span>
+    <span class="s1">&#39;summa_snow_layering_analysis/master/obs_data/dana_obs.csv&#39;</span><span class="p">,</span>
+    <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">skipinitialspace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -389,7 +389,7 @@ But that makes some of the plots look a little funky so I’m going
 to leave them in</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df.dropna().head()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -453,10 +453,10 @@ to leave them in</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Now we can start plotting easily!
-df[&#39;Tuolumne Meadows Pillow SWE [mm]&#39;].plot()
-df[&#39;Dana Meadows Pillow SWE [mm]&#39;].plot()
-plt.legend()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now we can start plotting easily!</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Tuolumne Meadows Pillow SWE [mm]&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Dana Meadows Pillow SWE [mm]&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -469,8 +469,8 @@ plt.legend()
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Alternatively, this plots all of the columns
-df.plot()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Alternatively, this plots all of the columns</span>
+<span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -487,12 +487,12 @@ put on the x and y axis. From this plot we can see
 That Dana Meadows tends to get more snow</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df.plot.scatter(
-    x=&#39;Tuolumne Meadows Pillow SWE [mm]&#39;,
-    y=&#39;Dana Meadows Pillow SWE [mm]&#39;
-)
-# Plot a one-to-one line
-plt.plot([0, 1500], [0, 1500], color=&#39;black&#39;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Tuolumne Meadows Pillow SWE [mm]&#39;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Dana Meadows Pillow SWE [mm]&#39;</span>
+<span class="p">)</span>
+<span class="c1"># Plot a one-to-one line</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1500</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1500</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -516,8 +516,8 @@ is always a good practice - now you’ll see the index
 is just yearly data rather than daily</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>yearly_max = df.groupby(df.index.year).max()
-yearly_max.head()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">yearly_max</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">yearly_max</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -581,8 +581,8 @@ yearly_max.head()
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Now we can plot this too
-yearly_max.plot()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now we can plot this too</span>
+<span class="n">yearly_max</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -599,7 +599,7 @@ Alternatively, you <em>can</em> do <code class="docutils literal notranslate"><s
 original plot, line plots are the default.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>yearly_max.plot.bar()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">yearly_max</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -623,11 +623,11 @@ generally when the peak of the snow season is for
 Yosemite.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>doy_mean = df.groupby(df.index.dayofyear).mean()
-doy_mean.plot()
-plt.axvline(265, label=&#39;September 22&#39;, color=&#39;dimgrey&#39;)
-plt.axvline(91, label=&#39;April 1&#39;, color=&#39;black&#39;, linestyle=&#39;--&#39;)
-plt.legend()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">doy_mean</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">dayofyear</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">doy_mean</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">265</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;September 22&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dimgrey&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">91</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;April 1&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -646,14 +646,14 @@ And now we can plot thos for Dana meadows to show the
 variability through the snow season</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>doy_med = df.groupby(df.index.dayofyear).median()
-doy_low = df.groupby(df.index.dayofyear).quantile(0.25)
-doy_high = df.groupby(df.index.dayofyear).quantile(0.75)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">doy_med</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">dayofyear</span><span class="p">)</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="n">doy_low</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">dayofyear</span><span class="p">)</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">doy_high</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">dayofyear</span><span class="p">)</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
 
-doy_med[&#39;Dana Meadows Pillow SWE [mm]&#39;].plot(color=&#39;black&#39;, label=&#39;median&#39;)
-doy_low[&#39;Dana Meadows Pillow SWE [mm]&#39;].plot(color=&#39;red&#39;, label=&#39;25th percentile&#39;)
-doy_high[&#39;Dana Meadows Pillow SWE [mm]&#39;].plot(color=&#39;blue&#39;, label=&#39;75th percentile&#39;)
-plt.legend()
+<span class="n">doy_med</span><span class="p">[</span><span class="s1">&#39;Dana Meadows Pillow SWE [mm]&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;median&#39;</span><span class="p">)</span>
+<span class="n">doy_low</span><span class="p">[</span><span class="s1">&#39;Dana Meadows Pillow SWE [mm]&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;25th percentile&#39;</span><span class="p">)</span>
+<span class="n">doy_high</span><span class="p">[</span><span class="s1">&#39;Dana Meadows Pillow SWE [mm]&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;75th percentile&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -688,14 +688,14 @@ just counts up. These are the “dayofyears” where 1 means January1,
 2 means January2, 91 means April1, and 265 means Sept22.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>pt = pd.pivot_table(
-    df, 
-    index=df.index.dayofyear, 
-    columns=df.index.year,
-    values=&#39;Tuolumne Meadows Pillow SWE [mm]&#39;, 
-    aggfunc=&#39;mean&#39;
-)
-pt.head()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pt</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span> 
+    <span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">dayofyear</span><span class="p">,</span> 
+    <span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span><span class="p">,</span>
+    <span class="n">values</span><span class="o">=</span><span class="s1">&#39;Tuolumne Meadows Pillow SWE [mm]&#39;</span><span class="p">,</span> 
+    <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span>
+<span class="p">)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -898,7 +898,7 @@ Similarly we make all the of the lines grey just so it’s
 a bit less aggressive on the eyes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>pt.plot(legend=False, color=&#39;grey&#39;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

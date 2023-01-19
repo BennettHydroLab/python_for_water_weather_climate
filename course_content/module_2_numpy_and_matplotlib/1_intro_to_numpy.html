@@ -495,22 +495,22 @@ I’m also importing math so that we can compare
 and finally the function from the previous script</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import time
-import math
-import numpy as np
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-def air_pressure_at_height(h):
-    p0 = 101325      # reference pressure in pascals
-    M = 0.02896968   # molar mass of air kg/mol
-    g = 9.81         # gravity m/s2
-    R0 = 8.314462618 # gas constant J/(mol·K) 
-    T = 273          # temp in kelvin
+<span class="k">def</span> <span class="nf">air_pressure_at_height</span><span class="p">(</span><span class="n">h</span><span class="p">):</span>
+    <span class="n">p0</span> <span class="o">=</span> <span class="mi">101325</span>      <span class="c1"># reference pressure in pascals</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="mf">0.02896968</span>   <span class="c1"># molar mass of air kg/mol</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="mf">9.81</span>         <span class="c1"># gravity m/s2</span>
+    <span class="n">R0</span> <span class="o">=</span> <span class="mf">8.314462618</span> <span class="c1"># gas constant J/(mol·K) </span>
+    <span class="n">T</span> <span class="o">=</span> <span class="mi">273</span>          <span class="c1"># temp in kelvin</span>
 
-    ratio = -(g * h * M) / (R0 * T)
-    # NOTE: here I changed math.exp -&gt; np.exp, 
-    #       you will see why in a minute
-    p_h = p0 * np.exp(ratio)
-    return p_h
+    <span class="n">ratio</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">g</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="n">M</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">R0</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span>
+    <span class="c1"># NOTE: here I changed math.exp -&gt; np.exp, </span>
+    <span class="c1">#       you will see why in a minute</span>
+    <span class="n">p_h</span> <span class="o">=</span> <span class="n">p0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">ratio</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">p_h</span>
 </pre></div>
 </div>
 </div>
@@ -531,27 +531,27 @@ def air_pressure_at_height(h):
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Heights to calculate pressure at
-start = 0
-end = 20000
-step = 1
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Heights to calculate pressure at</span>
+<span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">end</span> <span class="o">=</span> <span class="mi">20000</span>
+<span class="n">step</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>t0 = time.time() 
-h_list = range(start, end, step)
-p_list = [] 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> 
+<span class="n">h_list</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+<span class="n">p_list</span> <span class="o">=</span> <span class="p">[]</span> 
 
-for height in h_list: 
-    p_h = air_pressure_at_height(height)
-    p_list.append(p_h) 
+<span class="k">for</span> <span class="n">height</span> <span class="ow">in</span> <span class="n">h_list</span><span class="p">:</span> 
+    <span class="n">p_h</span> <span class="o">=</span> <span class="n">air_pressure_at_height</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
+    <span class="n">p_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p_h</span><span class="p">)</span> 
 
-t1 = time.time()
-base_python_time = t1-t0
-print(&quot;With plain python this took:&quot;, base_python_time, &quot; seconds&quot;)
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">base_python_time</span> <span class="o">=</span> <span class="n">t1</span><span class="o">-</span><span class="n">t0</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;With plain python this took:&quot;</span><span class="p">,</span> <span class="n">base_python_time</span><span class="p">,</span> <span class="s2">&quot; seconds&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -563,13 +563,13 @@ print(&quot;With plain python this took:&quot;, base_python_time, &quot; seconds
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>t0 = time.time()
-h_array = np.arange(start, end, step)
-p_array = air_pressure_at_height(h_array)
-t1 = time.time()
-numpy_time = t1-t0
-print(&quot;With numpy this took:&quot;, numpy_time, &quot; seconds&quot;)
-print(&quot;Numpy version is &quot;, base_python_time/numpy_time, &quot; times faster&quot;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">h_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+<span class="n">p_array</span> <span class="o">=</span> <span class="n">air_pressure_at_height</span><span class="p">(</span><span class="n">h_array</span><span class="p">)</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">numpy_time</span> <span class="o">=</span> <span class="n">t1</span><span class="o">-</span><span class="n">t0</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;With numpy this took:&quot;</span><span class="p">,</span> <span class="n">numpy_time</span><span class="p">,</span> <span class="s2">&quot; seconds&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Numpy version is &quot;</span><span class="p">,</span> <span class="n">base_python_time</span><span class="o">/</span><span class="n">numpy_time</span><span class="p">,</span> <span class="s2">&quot; times faster&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -587,10 +587,10 @@ N-dimensional array. In our case N=1. We can also look at the shape
 NOTE: The length of the shape is always equal to the number of dimensions</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(type(h_array))
-print(h_array.ndim)
-print(h_array.shape) 
-print(len(h_array.shape) == h_array.ndim)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">h_array</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">h_array</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">h_array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">h_array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="n">h_array</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -608,13 +608,13 @@ True
 <h1>What else can you do with numpy? Basically anything with numbers!<a class="headerlink" href="#what-else-can-you-do-with-numpy-basically-anything-with-numbers" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>array_shape = (5, 5)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">array_shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 
-# Create an array of all ones with a specific shape
-ones_matrix = np.ones(array_shape)
-print(ones_matrix)
-print(ones_matrix.shape)
-print()
+<span class="c1"># Create an array of all ones with a specific shape</span>
+<span class="n">ones_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">array_shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ones_matrix</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ones_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -634,8 +634,8 @@ print()
 <h1>Numpy also makes math easier to do, now you can just multiply numbers and any ndarray object<a class="headerlink" href="#numpy-also-makes-math-easier-to-do-now-you-can-just-multiply-numbers-and-any-ndarray-object" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(0.1 * ones_matrix)
-print()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mf">0.1</span> <span class="o">*</span> <span class="n">ones_matrix</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -655,20 +655,20 @@ print()
 <p>First we’ll cover some handy functions:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(np.sum(ones_matrix))
-print(np.sum(ones_matrix, axis=1))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ones_matrix</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ones_matrix</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
 
-# Create an array from a list
-sample_1d = np.array([0,1,2])
-sample_2d = np.array(
-    [[0,1,2],
-     [3,4,5]]
-)
-print(sample_1d)
-print()
-print(sample_2d)
-print() #creates a space bettewn the resutls
-print(np.sum(sample_2d, axis=1))
+<span class="c1"># Create an array from a list</span>
+<span class="n">sample_1d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">sample_2d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span>
+     <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]]</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sample_1d</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sample_2d</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span> <span class="c1">#creates a space bettewn the resutls</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sample_2d</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -687,10 +687,10 @@ print(np.sum(sample_2d, axis=1))
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Create an array of all zeros
-zeros = np.zeros(array_shape)
-print(zeros)
-print()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an array of all zeros</span>
+<span class="n">zeros</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">array_shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">zeros</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -706,11 +706,11 @@ print()
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Arange is just like the regular `range` function
-# but produces an array rather than a `range` object
-sequence_1 = np.arange(start, end, step)
-print(sequence_1)
-print()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Arange is just like the regular `range` function</span>
+<span class="c1"># but produces an array rather than a `range` object</span>
+<span class="n">sequence_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sequence_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -726,9 +726,9 @@ Here, 5 evenly spaced values form 0 to pi
 NOTE: Linspace actually includes the end point</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sequence_2 = np.linspace(0, np.pi, 5)
-print(sequence_2)
-print()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sequence_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sequence_2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -743,8 +743,8 @@ print()
 <h1>You can create random numbers too<a class="headerlink" href="#you-can-create-random-numbers-too" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>random_matrix = np.random.random(array_shape)
-print(random_matrix)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">array_shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">random_matrix</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -763,15 +763,15 @@ print(random_matrix)
 <h1>Numpy is really good for linear algebra<a class="headerlink" href="#numpy-is-really-good-for-linear-algebra" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>vector_shape = array_shape[0]
-random_vector = np.random.random(vector_shape)
-random_matrix_2 = np.random.random(array_shape)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vector_shape</span> <span class="o">=</span> <span class="n">array_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">random_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">vector_shape</span><span class="p">)</span>
+<span class="n">random_matrix_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">array_shape</span><span class="p">)</span>
 
-# For example the dot product   
-random_dot = np.dot(random_vector, random_matrix_2)
+<span class="c1"># For example the dot product   </span>
+<span class="n">random_dot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">random_vector</span><span class="p">,</span> <span class="n">random_matrix_2</span><span class="p">)</span>
 
-# Or matrix multiplication
-random_matmul = np.matmul(random_matrix, random_matrix_2)
+<span class="c1"># Or matrix multiplication</span>
+<span class="n">random_matmul</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">random_matrix</span><span class="p">,</span> <span class="n">random_matrix_2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -781,10 +781,10 @@ random_matmul = np.matmul(random_matrix, random_matrix_2)
 <h1>And there are a ton of operations, you can usually find what you need by searching online for “numpy (whatever function you want)”<a class="headerlink" href="#and-there-are-a-ton-of-operations-you-can-usually-find-what-you-need-by-searching-online-for-numpy-whatever-function-you-want" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>np.exp(random_matrix)
-np.sin(random_matrix)
-np.log(random_vector)
-np.max(random_matmul)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">random_matrix</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">random_matrix</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">random_vector</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">random_matmul</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -802,21 +802,21 @@ np.max(random_matmul)
 <h1>Like lists you can index arrays directly<a class="headerlink" href="#like-lists-you-can-index-arrays-directly" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sequence_1[0]
-sequence_1[-1]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sequence_1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">sequence_1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-# You can also &quot;slice&quot; which is basically indexing
-# multiple values. The syntax for slicing is like so
-start = 0
-stop = 5
-step = 2
-print(sequence_1[start:stop:step])
+<span class="c1"># You can also &quot;slice&quot; which is basically indexing</span>
+<span class="c1"># multiple values. The syntax for slicing is like so</span>
+<span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">stop</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">step</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sequence_1</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">:</span><span class="n">step</span><span class="p">])</span>
 
-# Additionally you can create a `slice` object which
-# can be convenient because you can use it multiple times
-my_slice = slice(start, stop, step)
-print(sequence_1[my_slice])
-print(sequence_2[my_slice])
+<span class="c1"># Additionally you can create a `slice` object which</span>
+<span class="c1"># can be convenient because you can use it multiple times</span>
+<span class="n">my_slice</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sequence_1</span><span class="p">[</span><span class="n">my_slice</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sequence_2</span><span class="p">[</span><span class="n">my_slice</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -833,19 +833,19 @@ print(sequence_2[my_slice])
 <h1>For multidimensional arrays indexing works a  bit differently<a class="headerlink" href="#for-multidimensional-arrays-indexing-works-a-bit-differently" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>increasing_matrix = np.arange(0, 9).reshape((3,3)) #reare for a 1 dim array to a  2 dim array
-print(increasing_matrix)
-#indexing on a two dimientional array makes it 
-print()
-# Get the first row
-print(increasing_matrix[0])
-print()
-# Get the middle value
-print(increasing_matrix[1,2])
-print()
-# Get the first column, the `:` means &quot;everything&quot;
-# It is equivalent to `slice(None, None, None)`
-print(increasing_matrix[:, 0])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">increasing_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span> <span class="c1">#reare for a 1 dim array to a  2 dim array</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">increasing_matrix</span><span class="p">)</span>
+<span class="c1">#indexing on a two dimientional array makes it </span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="c1"># Get the first row</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">increasing_matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="c1"># Get the middle value</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">increasing_matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="c1"># Get the first column, the `:` means &quot;everything&quot;</span>
+<span class="c1"># It is equivalent to `slice(None, None, None)`</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">increasing_matrix</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -868,10 +868,10 @@ print(increasing_matrix[:, 0])
 <h1>Arrays can be of large dimension (up to, I think, 64)<a class="headerlink" href="#arrays-can-be-of-large-dimension-up-to-i-think-64" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>length = 3
-dim = 5
-array_5d = np.arange(0, length**dim).reshape(dim * (length,))
-print(array_5d.shape, array_5d.ndim)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">length</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">dim</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">array_5d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">length</span><span class="o">**</span><span class="n">dim</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">dim</span> <span class="o">*</span> <span class="p">(</span><span class="n">length</span><span class="p">,))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">array_5d</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">array_5d</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -890,14 +890,14 @@ But because I posted it on GitHub we can open it directly
 over the internet.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>filename =(&#39;https://raw.githubusercontent.com/HAS-Tools-Fall2022&#39;
-           &#39;/Course-Materials22/main/data/verde_river_daily_flow_cfs.csv&#39;)
-flows = np.loadtxt(
-    filename,           # The location of the text file
-    delimiter=&#39;,&#39;,      # character which splits data into groups
-    usecols=1           # Just take column 1, which is the flows
-)
-print(flows)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/HAS-Tools-Fall2022&#39;</span>
+           <span class="s1">&#39;/Course-Materials22/main/data/verde_river_daily_flow_cfs.csv&#39;</span><span class="p">)</span>
+<span class="n">flows</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span>
+    <span class="n">filename</span><span class="p">,</span>           <span class="c1"># The location of the text file</span>
+    <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span>      <span class="c1"># character which splits data into groups</span>
+    <span class="n">usecols</span><span class="o">=</span><span class="mi">1</span>           <span class="c1"># Just take column 1, which is the flows</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">flows</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

@@ -342,11 +342,11 @@ title="Print to PDF"
 <h1>Introduction to GIS in python with <code class="docutils literal notranslate"><span class="pre">geopandas</span></code><a class="headerlink" href="#introduction-to-gis-in-python-with-geopandas" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-import geopandas as gpd
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 </pre></div>
 </div>
 </div>
@@ -371,13 +371,13 @@ this up with the <code class="docutils literal notranslate"><span class="pre">gp
 figure out that it’s a shapefile.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>az = gpd.read_file(
-    &#39;/vsicurl/https://github.com/HAS-Tools-Fall2022&#39;
-    &#39;/Course-Materials22/raw/main/data/arizona_shapefile&#39;
-    &#39;/tl_2016_04_cousub.shp&#39;
-)
-print(type(az))
-az.head()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span>
+    <span class="s1">&#39;/vsicurl/https://github.com/HAS-Tools-Fall2022&#39;</span>
+    <span class="s1">&#39;/Course-Materials22/raw/main/data/arizona_shapefile&#39;</span>
+    <span class="s1">&#39;/tl_2016_04_cousub.shp&#39;</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">az</span><span class="p">))</span>
+<span class="n">az</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -551,7 +551,7 @@ the shapes of the vector data.</p>
 indexing the geometry directly.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>az[&#39;geometry&#39;].iloc[0]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -563,7 +563,7 @@ here we can just call the <code class="docutils literal notranslate"><span class
 will automatically show you all of the geometries.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>az.plot()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -581,7 +581,7 @@ will get you a colorbar. Here I’m just plotting
 the area of the land in each of the polygons.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>az.plot(column=&#39;ALAND&#39;, legend=True)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;ALAND&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -598,8 +598,8 @@ I’ll also change the colormap with <code class="docutils literal notranslate">
 just to spice things up.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>az[&#39;area&#39;] = az.geometry.area
-az.plot(column=&#39;area&#39;, legend=True, cmap=&#39;turbo&#39;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">area</span>
+<span class="n">az</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;area&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;turbo&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -624,12 +624,12 @@ but does not actually contain the streamflow timeseries.
 We’ll get to that in your homework.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>gages = gpd.read_file(
-     &#39;/vsicurl/https://github.com/HAS-Tools-Fall2022&#39;
-     &#39;/Course-Materials22/raw/main/data/gagesii_shapefile/&#39;
-     &#39;gagesII_9322_sept30_2011.shp&#39;   
-)
-gages.head()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gages</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span>
+     <span class="s1">&#39;/vsicurl/https://github.com/HAS-Tools-Fall2022&#39;</span>
+     <span class="s1">&#39;/Course-Materials22/raw/main/data/gagesii_shapefile/&#39;</span>
+     <span class="s1">&#39;gagesII_9322_sept30_2011.shp&#39;</span>   
+<span class="p">)</span>
+<span class="n">gages</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -771,7 +771,7 @@ just to make things prettier. Here you can see the full
 US, including Alaska, Hawaii, and Puerto Rico.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>gages.plot(markersize=1, color=&#39;goldenrod&#39;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gages</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">markersize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;goldenrod&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -791,8 +791,8 @@ Great question - but let’s jump down to the next cell to
 figure out what happened.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ax = gages.plot(markersize=1, color=&#39;goldenrod&#39;)
-az.plot(ax=ax, color=&#39;crimson&#39;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">gages</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">markersize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;goldenrod&#39;</span><span class="p">)</span>
+<span class="n">az</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;crimson&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -814,13 +814,13 @@ meters, so they don’t line up right. How do we fix this?
 See the answer below!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ax = gages.plot(markersize=1, color=&#39;goldenrod&#39;)
-az.plot(
-    ax=ax, 
-    color=&#39;crimson&#39;, 
-    edgecolor=&#39;crimson&#39;, 
-    linewidth=10
-)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">gages</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">markersize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;goldenrod&#39;</span><span class="p">)</span>
+<span class="n">az</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> 
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;crimson&#39;</span><span class="p">,</span> 
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;crimson&#39;</span><span class="p">,</span> 
+    <span class="n">linewidth</span><span class="o">=</span><span class="mi">10</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -840,9 +840,9 @@ just because I find lat/lon to be more intuitive.
 Then, it’s easy enough to just plot it all together!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>gages = gages.to_crs(az.crs)
-ax = az.plot(color=&#39;crimson&#39;)
-gages.plot(markersize=1, color=&#39;goldenrod&#39;, ax=ax, alpha=0.2)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gages</span> <span class="o">=</span> <span class="n">gages</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">az</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;crimson&#39;</span><span class="p">)</span>
+<span class="n">gages</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">markersize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;goldenrod&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -859,10 +859,10 @@ easy again thanks to geopandas with the <code class="docutils literal notranslat
 Then, we’ll just plot the thing up!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>az_gages = gages.clip(az)
-ax = az.plot(color=&#39;lightgrey&#39;, edgecolor=&#39;white&#39;)
-az_gages.plot(ax=ax, color=&#39;crimson&#39;, markersize=5)
-plt.title(&#39;Gages II data in Arizona&#39;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az_gages</span> <span class="o">=</span> <span class="n">gages</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">az</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgrey&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">az_gages</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;crimson&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Gages II data in Arizona&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

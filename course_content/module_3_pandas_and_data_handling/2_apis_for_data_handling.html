@@ -342,10 +342,10 @@ title="Print to PDF"
 <h1>Some lessons on working with real world data: APIs and data wrangling<a class="headerlink" href="#some-lessons-on-working-with-real-world-data-apis-and-data-wrangling" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import urllib
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
 </div>
@@ -375,9 +375,9 @@ seen as the best way to do this. For an overview see this:</p>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>random_numbers = np.random.random(5)
-print(&#39;The average of my random numbers is&#39;, np.mean(random_numbers))
-print(f&#39;The average of my random numbers is {np.mean(random_numbers)}&#39;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random_numbers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The average of my random numbers is&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">random_numbers</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The average of my random numbers is </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">random_numbers</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -395,12 +395,12 @@ to get the data for. With those defined clearly it makes it much
 easier for someone else to understand what you are trying to do.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>args = {
-    &#39;site_no&#39;: &#39;09506000&#39;,
-    &#39;begin_date&#39;: &#39;2021-09-25&#39;,
-    &#39;end_date&#39;: &#39;2022-09-25&#39;
-}
-query = urllib.parse.urlencode(args)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">args</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;site_no&#39;</span><span class="p">:</span> <span class="s1">&#39;09506000&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;begin_date&#39;</span><span class="p">:</span> <span class="s1">&#39;2021-09-25&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;end_date&#39;</span><span class="p">:</span> <span class="s1">&#39;2022-09-25&#39;</span>
+<span class="p">}</span>
+<span class="n">query</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlencode</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -410,11 +410,11 @@ which will point to the same website that we saw in the lecture portion
 You can verify this by copying the URL into your web browser.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>verde_url = (
-    f&#39;https://waterdata.usgs.gov/nwis/dv?&#39;
-    f&#39;cb_00060=on&amp;format=rdb&amp;referred_module=sw&amp;{query}&#39;
-)
-print(verde_url)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">verde_url</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="sa">f</span><span class="s1">&#39;https://waterdata.usgs.gov/nwis/dv?&#39;</span>
+    <span class="sa">f</span><span class="s1">&#39;cb_00060=on&amp;format=rdb&amp;referred_module=sw&amp;</span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">verde_url</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -444,16 +444,16 @@ data directly from the internet because formats vary.</p>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>response = urllib.request.urlopen(verde_url)
-df = pd.read_table(
-    response,
-    comment=&#39;#&#39;,
-    skipfooter=1,
-    delim_whitespace=True,
-    names=[&#39;agency&#39;, &#39;site&#39;, &#39;date&#39;, &#39;streamflow&#39;, &#39;quality_flag&#39;],
-    index_col=2,
-    parse_dates=True
-).iloc[2:]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">verde_url</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span>
+    <span class="n">response</span><span class="p">,</span>
+    <span class="n">comment</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">,</span>
+    <span class="n">skipfooter</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">delim_whitespace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;agency&#39;</span><span class="p">,</span> <span class="s1">&#39;site&#39;</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;streamflow&#39;</span><span class="p">,</span> <span class="s1">&#39;quality_flag&#39;</span><span class="p">],</span>
+    <span class="n">index_col</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
 </pre></div>
 </div>
 </div>
@@ -469,9 +469,9 @@ the index to datetimes. When processing raw data
 it’s common to have to do some extra postprocessing</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df[&#39;streamflow&#39;] = df[&#39;streamflow&#39;].astype(np.float64)
-df.index = pd.DatetimeIndex(df.index)
-df.head()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;streamflow&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;streamflow&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -551,10 +551,10 @@ df.head()
 You can do all of the standard pandas stuff</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df[&#39;streamflow&#39;].plot()
-plt.semilogy()
-plt.ylabel(&#39;Streamflow [cfs]&#39;)
-plt.xlabel(&#39;&#39;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;streamflow&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Streamflow [cfs]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -572,49 +572,49 @@ functions to save space, and make this easier for you to port
 to your homework</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def create_usgs_url(site_no, begin_date, end_date):
-    return (
-        f&#39;https://waterdata.usgs.gov/nwis/dv?&#39;
-        f&#39;cb_00060=on&amp;format=rdb&amp;referred_module=sw&amp;&#39;
-        f&#39;site_no={site_no}&amp;&#39;
-        f&#39;begin_date={begin_date}&amp;&#39;
-        f&#39;end_date={end_date}&#39;
-    )
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_usgs_url</span><span class="p">(</span><span class="n">site_no</span><span class="p">,</span> <span class="n">begin_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;https://waterdata.usgs.gov/nwis/dv?&#39;</span>
+        <span class="sa">f</span><span class="s1">&#39;cb_00060=on&amp;format=rdb&amp;referred_module=sw&amp;&#39;</span>
+        <span class="sa">f</span><span class="s1">&#39;site_no=</span><span class="si">{</span><span class="n">site_no</span><span class="si">}</span><span class="s1">&amp;&#39;</span>
+        <span class="sa">f</span><span class="s1">&#39;begin_date=</span><span class="si">{</span><span class="n">begin_date</span><span class="si">}</span><span class="s1">&amp;&#39;</span>
+        <span class="sa">f</span><span class="s1">&#39;end_date=</span><span class="si">{</span><span class="n">end_date</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="p">)</span>
 
-def open_usgs_data(site, begin_date, end_date):
-    url = create_usgs_url((site), begin_date, end_date)
-    response = urllib.request.urlopen(url)
-    df = pd.read_table(
-        response,
-        comment=&#39;#&#39;,
-        skipfooter=1,
-        delim_whitespace=True,
-        names=[&#39;agency&#39;, &#39;site&#39;, &#39;date&#39;, &#39;streamflow&#39;, &#39;quality_flag&#39;],
-        index_col=2,
-        parse_dates=True
-    ).iloc[2:]
+<span class="k">def</span> <span class="nf">open_usgs_data</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">begin_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">create_usgs_url</span><span class="p">((</span><span class="n">site</span><span class="p">),</span> <span class="n">begin_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span>
+        <span class="n">response</span><span class="p">,</span>
+        <span class="n">comment</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">,</span>
+        <span class="n">skipfooter</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">delim_whitespace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;agency&#39;</span><span class="p">,</span> <span class="s1">&#39;site&#39;</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;streamflow&#39;</span><span class="p">,</span> <span class="s1">&#39;quality_flag&#39;</span><span class="p">],</span>
+        <span class="n">index_col</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
 
-    # Now convert the streamflow data to floats and
-    # the index to datetimes. When processing raw data
-    # it&#39;s common to have to do some extra postprocessing
-    df[&#39;streamflow&#39;] = df[&#39;streamflow&#39;].astype(np.float64)
-    df.index = pd.DatetimeIndex(df.index)
-    return df
+    <span class="c1"># Now convert the streamflow data to floats and</span>
+    <span class="c1"># the index to datetimes. When processing raw data</span>
+    <span class="c1"># it&#39;s common to have to do some extra postprocessing</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;streamflow&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;streamflow&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>site = &#39;09506000&#39;
-begin_date = &#39;2000-09-25&#39;
-end_date = &#39;2022-09-25&#39;
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">site</span> <span class="o">=</span> <span class="s1">&#39;09506000&#39;</span>
+<span class="n">begin_date</span> <span class="o">=</span> <span class="s1">&#39;2000-09-25&#39;</span>
+<span class="n">end_date</span> <span class="o">=</span> <span class="s1">&#39;2022-09-25&#39;</span>
 
-df = open_usgs_data(site, begin_date, end_date)
-df[&#39;streamflow&#39;].plot()
-plt.semilogy()
-plt.ylabel(&#39;Streamflow [cfs]&#39;)
-plt.xlabel(&#39;&#39;)
+<span class="n">df</span> <span class="o">=</span> <span class="n">open_usgs_data</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">begin_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;streamflow&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Streamflow [cfs]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -634,10 +634,10 @@ Just a quick aside on another nice feature of pandas, the resample
 Let’s just resample the data down to monthly means like so:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df.resample(&#39;M&#39;).mean()[&#39;streamflow&#39;].plot()
-plt.semilogy()
-plt.ylabel(&#39;Streamflow [cfs]&#39;)
-plt.xlabel(&#39;&#39;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="s1">&#39;streamflow&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Streamflow [cfs]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -661,27 +661,27 @@ API explorer that you can use to prototype:</p>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>url = &quot;https://daymet.ornl.gov/single-pixel/api/data?lat=34.9455&amp;lon=-113.2549&quot;  \
-       &quot;&amp;vars=prcp&amp;start=1984-08-14&amp;end=2014-10-18&amp;format=json&quot;
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://daymet.ornl.gov/single-pixel/api/data?lat=34.9455&amp;lon=-113.2549&quot;</span>  \
+       <span class="s2">&quot;&amp;vars=prcp&amp;start=1984-08-14&amp;end=2014-10-18&amp;format=json&quot;</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>begin_date = &#39;2000-09-20&#39;
-end_date = &#39;2020-09-25&#39;
-args = {
-    &#39;lat&#39;:  34.4483605,
-    &#39;lon&#39;: -111.7898705,
-    &#39;start&#39;: begin_date,
-    &#39;end&#39;: end_date,
-    &#39;vars&#39;: [&#39;prcp&#39;, &#39;Tmax&#39;, &#39;Tmin&#39;],
-    &#39;format&#39;: &#39;csv&#39;
-}
-query = urllib.parse.urlencode(args)
-url = f&quot;https://daymet.ornl.gov/single-pixel/api/data?{query}&quot;
-url
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">begin_date</span> <span class="o">=</span> <span class="s1">&#39;2000-09-20&#39;</span>
+<span class="n">end_date</span> <span class="o">=</span> <span class="s1">&#39;2020-09-25&#39;</span>
+<span class="n">args</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;lat&#39;</span><span class="p">:</span>  <span class="mf">34.4483605</span><span class="p">,</span>
+    <span class="s1">&#39;lon&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">111.7898705</span><span class="p">,</span>
+    <span class="s1">&#39;start&#39;</span><span class="p">:</span> <span class="n">begin_date</span><span class="p">,</span>
+    <span class="s1">&#39;end&#39;</span><span class="p">:</span> <span class="n">end_date</span><span class="p">,</span>
+    <span class="s1">&#39;vars&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;prcp&#39;</span><span class="p">,</span> <span class="s1">&#39;Tmax&#39;</span><span class="p">,</span> <span class="s1">&#39;Tmin&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;format&#39;</span><span class="p">:</span> <span class="s1">&#39;csv&#39;</span>
+<span class="p">}</span>
+<span class="n">query</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlencode</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://daymet.ornl.gov/single-pixel/api/data?</span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">url</span>
 </pre></div>
 </div>
 </div>
@@ -693,9 +693,9 @@ url
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>response = urllib.request.urlopen(url)
-daymet_df = pd.read_csv(response, header=6)
-daymet_df.head()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">daymet_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">daymet_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -804,9 +804,9 @@ me there:
 <a class="reference external" href="https://stackoverflow.com/questions/34258892/converting-year-and-day-of-year-into-datetime-index-in-pandas">https://stackoverflow.com/questions/34258892/converting-year-and-day-of-year-into-datetime-index-in-pandas</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>datestring = (daymet_df[&#39;year&#39;].astype(str) 
-              + daymet_df[&#39;yday&#39;].astype(str))
-datestring.head()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datestring</span> <span class="o">=</span> <span class="p">(</span><span class="n">daymet_df</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> 
+              <span class="o">+</span> <span class="n">daymet_df</span><span class="p">[</span><span class="s1">&#39;yday&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
+<span class="n">datestring</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -826,9 +826,9 @@ function, with a format of <code class="docutils literal notranslate"><span clas
 by the Julian day (AKA day of year)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>dates = pd.to_datetime(datestring, format=&#39;%Y%j&#39;)
-daymet_df.index = pd.DatetimeIndex(dates)
-daymet_df.head()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">datestring</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%Y%j&#39;</span><span class="p">)</span>
+<span class="n">daymet_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span>
+<span class="n">daymet_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -933,10 +933,10 @@ daymet means we have to reindex to the dates from the
 USGS database. Finally, for shorthand I just rename the whole thing <code class="docutils literal notranslate"><span class="pre">df</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>verde_df = open_usgs_data(site, begin_date, end_date)
-daymet_df = daymet_df.reindex(verde_df.index)
-daymet_df[&#39;streamflow&#39;] = verde_df[&#39;streamflow&#39;]
-df = daymet_df
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">verde_df</span> <span class="o">=</span> <span class="n">open_usgs_data</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">begin_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">)</span>
+<span class="n">daymet_df</span> <span class="o">=</span> <span class="n">daymet_df</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">verde_df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">daymet_df</span><span class="p">[</span><span class="s1">&#39;streamflow&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">verde_df</span><span class="p">[</span><span class="s1">&#39;streamflow&#39;</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">daymet_df</span>
 </pre></div>
 </div>
 </div>
@@ -950,9 +950,9 @@ df = daymet_df
 <p>And now we can do some comparisons!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df_monthly = df.resample(&#39;M&#39;).mean()
-df_monthly.plot.scatter(x=&#39;tmax (deg c)&#39;, y=&#39;streamflow&#39;)
-plt.semilogy()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_monthly</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">df_monthly</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;tmax (deg c)&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;streamflow&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>

@@ -642,11 +642,11 @@ title="Print to PDF"
 <p>Before jumping into it, note that this “markdown cell” can be edited and you can see exactly how I added links and headers. The text in this markdown cell is not actually code that runs via python, but is added to the code cells for further explanation. This can be really helpful in your own work so that you can take notes and document your coding process. It’s also very helpful for tutorials as we saw before. Anyhow, now let’s jump in with some imports.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import zarr
-import numpy as np
-import xarray as xr
-import matplotlib.pyplot as plt
-from dask.diagnostics import ProgressBar
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">zarr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">dask.diagnostics</span> <span class="kn">import</span> <span class="n">ProgressBar</span>
 </pre></div>
 </div>
 </div>
@@ -670,20 +670,20 @@ from dask.diagnostics import ProgressBar
 <p>To access the data all we need to do is put in the url to the dataset on Pangeo Forge. That can just get passed into xarray and we are good to go. Note this dataset is about 3.0 GB, and the file opens basically instantly. This is because xarray is lazy and only opens the metadata. Data will only be pulled in over the network when we actually do something with it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>gpm_file = &#39;https://ncsa.osn.xsede.org/Pangeo/pangeo-forge/gpcp-feedstock/gpcp.zarr&#39;
-gpm = xr.open_dataset(gpm_file, engine=&#39;zarr&#39;, chunks={})
-gpm = gpm[&#39;precip&#39;]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gpm_file</span> <span class="o">=</span> <span class="s1">&#39;https://ncsa.osn.xsede.org/Pangeo/pangeo-forge/gpcp-feedstock/gpcp.zarr&#39;</span>
+<span class="n">gpm</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">gpm_file</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;zarr&#39;</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="p">{})</span>
+<span class="n">gpm</span> <span class="o">=</span> <span class="n">gpm</span><span class="p">[</span><span class="s1">&#39;precip&#39;</span><span class="p">]</span>
 
-sst_file = &#39;https://ncsa.osn.xsede.org/Pangeo/pangeo-forge/HadISST-feedstock/hadisst.zarr&#39;
-sst = xr.open_dataset(sst_file, engine=&#39;zarr&#39;, chunks={})
-sst = sst[&#39;sst&#39;]
+<span class="n">sst_file</span> <span class="o">=</span> <span class="s1">&#39;https://ncsa.osn.xsede.org/Pangeo/pangeo-forge/HadISST-feedstock/hadisst.zarr&#39;</span>
+<span class="n">sst</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">sst_file</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;zarr&#39;</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="p">{})</span>
+<span class="n">sst</span> <span class="o">=</span> <span class="n">sst</span><span class="p">[</span><span class="s1">&#39;sst&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>gpm
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gpm</span>
 </pre></div>
 </div>
 </div>
@@ -1224,8 +1224,8 @@ Attributes:
 <p>Your goal here is to group the <code class="docutils literal notranslate"><span class="pre">gpm</span></code> data by the <code class="docutils literal notranslate"><span class="pre">gpm['time'].dt.season</span></code> and compute the mean over the <code class="docutils literal notranslate"><span class="pre">time</span></code> dimension. The resulting dimensions of the new dataset should be <code class="docutils literal notranslate"><span class="pre">(season,</span> <span class="pre">latitude,</span> <span class="pre">longitude)</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>seasonal_precip = gpm.groupby(gpm[&#39;time&#39;].dt.season).mean(dim=&#39;time&#39;)
-seasonal_precip
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seasonal_precip</span> <span class="o">=</span> <span class="n">gpm</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">gpm</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">season</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="n">seasonal_precip</span>
 </pre></div>
 </div>
 </div>
@@ -1730,8 +1730,8 @@ Attributes:
 <p>Note 2: The <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">ProgressBar()</span></code> outer bit makes it so that we track how var in the computation things are. This should slowly tick up so that you can ensure things are happening. This is special to <code class="docutils literal notranslate"><span class="pre">dask</span></code> and cloud datasets.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>with ProgressBar():
-    seasonal_precip.plot(col=&#39;season&#39;, col_wrap=2, cmap=&#39;turbo&#39;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">ProgressBar</span><span class="p">():</span>
+    <span class="n">seasonal_precip</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s1">&#39;season&#39;</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;turbo&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1748,16 +1748,16 @@ Attributes:
 <p>Hey! That looks like garbage!? Often times you’ll need to do some data cleanup before you can run your analysis, as “bad values” can ruin everything like we’ve seen above. To fix things, let’s create a <code class="docutils literal notranslate"><span class="pre">mask</span></code> variable which we will use to filter out really large values. Specifically, we want to select data when <code class="docutils literal notranslate"><span class="pre">gpm</span> <span class="pre">&lt;</span> <span class="pre">1000.0</span></code> and where <code class="docutils literal notranslate"><span class="pre">gpm</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>. You can join logical statements with the <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> operator, just like using <code class="docutils literal notranslate"><span class="pre">+</span></code> to add two arithmetic operations. Your only task here is to create the mask variable.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>with ProgressBar():
-    low_condition = gpm &gt; 0.0
-    high_condition = gpm &lt; 1000.0
-    mask = low_condition &amp; high_condition
-    seasonal_precip = (gpm.where(mask)
-                          .groupby(gpm[&#39;time&#39;].dt.season)
-                          .mean(dim=&#39;time&#39;)
-                          .compute())
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">ProgressBar</span><span class="p">():</span>
+    <span class="n">low_condition</span> <span class="o">=</span> <span class="n">gpm</span> <span class="o">&gt;</span> <span class="mf">0.0</span>
+    <span class="n">high_condition</span> <span class="o">=</span> <span class="n">gpm</span> <span class="o">&lt;</span> <span class="mf">1000.0</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">low_condition</span> <span class="o">&amp;</span> <span class="n">high_condition</span>
+    <span class="n">seasonal_precip</span> <span class="o">=</span> <span class="p">(</span><span class="n">gpm</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+                          <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">gpm</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">season</span><span class="p">)</span>
+                          <span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+                          <span class="o">.</span><span class="n">compute</span><span class="p">())</span>
 
-seasonal_precip.plot(col=&#39;season&#39;, col_wrap=2, cmap=&#39;turbo&#39;, figsize=(12, 8))
+<span class="n">seasonal_precip</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s1">&#39;season&#39;</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;turbo&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1803,17 +1803,17 @@ seasonal_precip.plot(col=&#39;season&#39;, col_wrap=2, cmap=&#39;turbo&#39;, fig
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># slice(start, stop, step)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># slice(start, stop, step)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>nino_lat = slice(5, -5)
-nino_lon = slice(-170, -150)
-nino_extent = sst.sel(latitude=nino_lat, longitude=nino_lon)
-nino_extent
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nino_lat</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">nino_lon</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">170</span><span class="p">,</span> <span class="o">-</span><span class="mi">150</span><span class="p">)</span>
+<span class="n">nino_extent</span> <span class="o">=</span> <span class="n">sst</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="n">nino_lat</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=</span><span class="n">nino_lon</span><span class="p">)</span>
+<span class="n">nino_extent</span>
 </pre></div>
 </div>
 </div>
@@ -2310,8 +2310,8 @@ Attributes:
 <p>The resulting DataArray should only have a time dimension</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>nino_sst = nino_extent.mean(dim=[&#39;latitude&#39;, &#39;longitude&#39;])
-nino_sst
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nino_sst</span> <span class="o">=</span> <span class="n">nino_extent</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;latitude&#39;</span><span class="p">,</span> <span class="s1">&#39;longitude&#39;</span><span class="p">])</span>
+<span class="n">nino_sst</span>
 </pre></div>
 </div>
 </div>
@@ -2767,7 +2767,7 @@ Coordinates:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>nino_sst.plot()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nino_sst</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -2785,8 +2785,8 @@ Coordinates:
 <p>The resulting DataArray should have no dimensions, and a <code class="docutils literal notranslate"><span class="pre">shape</span></code> of <code class="docutils literal notranslate"><span class="pre">()</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>nino_mean = nino_sst.mean(dim=&#39;time&#39;)
-nino_mean
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nino_mean</span> <span class="o">=</span> <span class="n">nino_sst</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="n">nino_mean</span>
 </pre></div>
 </div>
 </div>
@@ -3205,10 +3205,10 @@ dask.array&lt;mean_agg-aggregate, shape=(), dtype=float32, chunksize=(), chunkty
 <p>The resulting DataArray should have dimensions of time only. Values should be both positive and negative. You can even check to ensure that the mean is close to 0</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>with ProgressBar():
-    nino_anomalies = nino_sst - nino_mean
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">ProgressBar</span><span class="p">():</span>
+    <span class="n">nino_anomalies</span> <span class="o">=</span> <span class="n">nino_sst</span> <span class="o">-</span> <span class="n">nino_mean</span>
 
-nino_anomalies
+<span class="n">nino_anomalies</span>
 </pre></div>
 </div>
 </div>
@@ -3664,9 +3664,9 @@ Coordinates:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>(
-    nino_anomalies.mean().round(2) == 0
-).compute()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">nino_anomalies</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="p">)</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -4043,12 +4043,12 @@ array(True)</pre><div class='xr-wrap' style='display:none'><div class='xr-header
 <p>If you’ve made it this far you should be able to run the following code cell to create a plot like the one shown at the beginning of Step 2. The plot won’t look exactly the same because we are using a different dataset, different region of aggregation, and different method of plotting the smoothed timeseries. But, you should be able to see a similarity in the ebb-and-flow of the ENSO signature that we’re plotting below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig, ax = plt.subplots(1,1, figsize=(18, 5))
-nino_anomalies.plot(marker=&#39;.&#39;, linestyle=&#39;&#39;, color=&#39;lightgrey&#39;, label=&#39;Data points&#39;)
-nino_anomalies.rolling(time=12, center=True).mean().plot(label=&#39;Smoothed&#39;)
-ax.axhline(0, color=&#39;black&#39;)
-plt.ylabel(r&#39;SST Anomalies ($^{\circ} C$)&#39;)
-plt.legend()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">nino_anomalies</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgrey&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data points&#39;</span><span class="p">)</span>
+<span class="n">nino_anomalies</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Smoothed&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;SST Anomalies ($^{\circ} C$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -4074,16 +4074,16 @@ plt.legend()
 <p>Find the first and last times in both the <code class="docutils literal notranslate"><span class="pre">gpm</span></code> and <code class="docutils literal notranslate"><span class="pre">nino_anomalies</span></code> datasets. These can be computed by calling the <code class="docutils literal notranslate"><span class="pre">min</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code> functions on the “time” dimension of each dataset, respectively. This cell should print out a single time slice with times starting in 1996 and ending in 2021.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>first_gpm = gpm[&#39;time&#39;].isel(time=0)
-last_gpm = gpm[&#39;time&#39;].isel(time=-1)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_gpm</span> <span class="o">=</span> <span class="n">gpm</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">last_gpm</span> <span class="o">=</span> <span class="n">gpm</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 
-first_nino = nino_anomalies[&#39;time&#39;].isel(time=0)
-last_nino = nino_anomalies[&#39;time&#39;].isel(time=-1)
+<span class="n">first_nino</span> <span class="o">=</span> <span class="n">nino_anomalies</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">last_nino</span> <span class="o">=</span> <span class="n">nino_anomalies</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 
-first_time = max(first_gpm, first_nino)
-last_time = min(last_gpm, last_nino)
-time_slice = slice(first_time, last_time)
-time_slice
+<span class="n">first_time</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">first_gpm</span><span class="p">,</span> <span class="n">first_nino</span><span class="p">)</span>
+<span class="n">last_time</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">last_gpm</span><span class="p">,</span> <span class="n">last_nino</span><span class="p">)</span>
+<span class="n">time_slice</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">first_time</span><span class="p">,</span> <span class="n">last_time</span><span class="p">)</span>
+<span class="n">time_slice</span>
 </pre></div>
 </div>
 </div>
@@ -4113,7 +4113,7 @@ Attributes:
 <p>Next, we’ll need to align the timestamps so that they fit together. To do so, I’ve set you up to select out the correct time slice from the previous part but you’ll need to do the <code class="docutils literal notranslate"><span class="pre">resample</span></code> to a monthly mean. This can be accomplished by calling the <code class="docutils literal notranslate"><span class="pre">resample</span></code> function with an argument which is a dictionary where the key is <code class="docutils literal notranslate"><span class="pre">'time'</span></code> and the <code class="docutils literal notranslate"><span class="pre">value</span></code> is <code class="docutils literal notranslate"><span class="pre">'1M'</span></code> (which means “one month”). Finally, after the call to resample you can compute the mean with the <code class="docutils literal notranslate"><span class="pre">mean</span></code> function. These <code class="docutils literal notranslate"><span class="pre">monthly_nino</span></code> and <code class="docutils literal notranslate"><span class="pre">monthly_gpm</span></code> variables should be able to be placed into the same dataset which has dims of <code class="docutils literal notranslate"><span class="pre">time</span></code>, <code class="docutils literal notranslate"><span class="pre">latitude</span></code>, and <code class="docutils literal notranslate"><span class="pre">longitude</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>monthly_nino
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">monthly_nino</span>
 </pre></div>
 </div>
 </div>
@@ -4573,17 +4573,17 @@ Coordinates:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>monthly_nino = nino_anomalies.sel(time=time_slice)
-monthly_gpm = gpm.sel(time=time_slice)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">monthly_nino</span> <span class="o">=</span> <span class="n">nino_anomalies</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">time_slice</span><span class="p">)</span>
+<span class="n">monthly_gpm</span> <span class="o">=</span> <span class="n">gpm</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">time_slice</span><span class="p">)</span>
 
-monthly_nino = monthly_nino.resample(time=&#39;1M&#39;).mean()
-monthly_gpm = monthly_gpm.resample(time=&#39;1M&#39;).mean()
+<span class="n">monthly_nino</span> <span class="o">=</span> <span class="n">monthly_nino</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="s1">&#39;1M&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">monthly_gpm</span> <span class="o">=</span> <span class="n">monthly_gpm</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="s1">&#39;1M&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 
-# Putting things into a new dataset with shared coordinates
-ds = xr.Dataset()
-ds[&#39;nino_anomalies&#39;] = monthly_nino
-ds[&#39;precip&#39;] = monthly_gpm
-ds
+<span class="c1"># Putting things into a new dataset with shared coordinates</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">()</span>
+<span class="n">ds</span><span class="p">[</span><span class="s1">&#39;nino_anomalies&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">monthly_nino</span>
+<span class="n">ds</span><span class="p">[</span><span class="s1">&#39;precip&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">monthly_gpm</span>
+<span class="n">ds</span>
 </pre></div>
 </div>
 </div>
@@ -5193,11 +5193,11 @@ Data variables:
 <p>Finally, you’ll need to mask out the same precipitation data as you did in Step 1 Part 3. This should yield a plot which has some meaningful patterns. This might take some time to complete, so you should make sure that the first code cell completes with no errors before attempting to run the second one.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>low_condition = ds[&#39;precip&#39;] &gt; 0.0
-high_condition = ds[&#39;precip&#39;] &lt; 1000.0
-mask = low_condition &amp; high_condition
-ds[&#39;precip&#39;] = ds[&#39;precip&#39;].where(mask, other=np.nan)
-ds
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">low_condition</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;precip&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.0</span>
+<span class="n">high_condition</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;precip&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">1000.0</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">low_condition</span> <span class="o">&amp;</span> <span class="n">high_condition</span>
+<span class="n">ds</span><span class="p">[</span><span class="s1">&#39;precip&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;precip&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">other</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+<span class="n">ds</span>
 </pre></div>
 </div>
 </div>
@@ -5803,8 +5803,8 @@ Data variables:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>with ProgressBar():
-    ds[&#39;precip&#39;].mean(dim=&#39;time&#39;).plot()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">ProgressBar</span><span class="p">():</span>
+    <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;precip&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -5833,13 +5833,13 @@ Data variables:
 <p>Here you should be familiar with using either the <code class="docutils literal notranslate"><span class="pre">range</span></code> or <code class="docutils literal notranslate"><span class="pre">slice</span></code> notation to set up the <code class="docutils literal notranslate"><span class="pre">sea_monsoon_lat</span></code> and <code class="docutils literal notranslate"><span class="pre">sea_monsoon_lon</span></code> variables. Just setting those up should be all you need to do, I’ve already put together the reduction to a spatial mean together for you inside of the <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">ProgressBar()</span></code> clause. This will probably take a minute or two to run.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sea_monsoon_lat = slice(0, 10)
-sea_monsoon_lon = slice(100, 130)
-with ProgressBar():
-    sea_monsoon_ppt = ds.sel(
-        latitude=sea_monsoon_lat, 
-        longitude=sea_monsoon_lon
-    ).mean(dim=[&#39;latitude&#39;, &#39;longitude&#39;]).load()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sea_monsoon_lat</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">sea_monsoon_lon</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">130</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">ProgressBar</span><span class="p">():</span>
+    <span class="n">sea_monsoon_ppt</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span>
+        <span class="n">latitude</span><span class="o">=</span><span class="n">sea_monsoon_lat</span><span class="p">,</span> 
+        <span class="n">longitude</span><span class="o">=</span><span class="n">sea_monsoon_lon</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;latitude&#39;</span><span class="p">,</span> <span class="s1">&#39;longitude&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -5851,7 +5851,7 @@ with ProgressBar():
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sea_monsoon_ppt
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sea_monsoon_ppt</span>
 </pre></div>
 </div>
 </div>
@@ -6324,9 +6324,9 @@ Data variables:
 <p>When looking at the resulting plots, do you see any correlation between the two? Feel free to write your observations below, though it’s not necessary.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig, axes = plt.subplots(2,1, sharex=True)
-sea_monsoon_ppt[&#39;nino_anomalies&#39;].plot(ax=axes[0])
-sea_monsoon_ppt[&#39;precip&#39;].plot(ax=axes[1])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sea_monsoon_ppt</span><span class="p">[</span><span class="s1">&#39;nino_anomalies&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">sea_monsoon_ppt</span><span class="p">[</span><span class="s1">&#39;precip&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -6343,9 +6343,9 @@ sea_monsoon_ppt[&#39;precip&#39;].plot(ax=axes[1])
 <p>To confirm what you suspected from the previous plot let’s also do a scatter plot of it all. All you need to do here is fill in the variable names for <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sea_monsoon_ppt.plot.scatter(
-    x=&#39;nino_anomalies&#39;, y=&#39;precip&#39;
-)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sea_monsoon_ppt</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;nino_anomalies&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;precip&#39;</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -6362,12 +6362,12 @@ sea_monsoon_ppt[&#39;precip&#39;].plot(ax=axes[1])
 <p>Finally, let’s bring out the big moves and compute the correlation between these SST anomalies and precipitation amounts. To do so, use the <code class="docutils literal notranslate"><span class="pre">xr.corr</span></code> method like we did in the last assignment and plot the resulting correlations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>with ProgressBar():
-    r_nino_precip =  xr.corr(
-        ds[&#39;nino_anomalies&#39;], ds[&#39;precip&#39;], dim=&#39;time&#39;
-    ).compute()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">ProgressBar</span><span class="p">():</span>
+    <span class="n">r_nino_precip</span> <span class="o">=</span>  <span class="n">xr</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span>
+        <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;nino_anomalies&#39;</span><span class="p">],</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;precip&#39;</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
 
-r_nino_precip.plot()
+<span class="n">r_nino_precip</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>

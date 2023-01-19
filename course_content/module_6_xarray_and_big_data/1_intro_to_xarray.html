@@ -401,9 +401,9 @@ the data structures, concepts, and capabilities
 of xarray.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
-import matplotlib.pyplot as plt
-import xarray as xr
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
 </pre></div>
 </div>
 </div>
@@ -435,8 +435,8 @@ very easy to browse around. Try playing with the output
 a little bit to see what’s in the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ds = xr.tutorial.open_dataset(&#39;air_temperature&#39;)
-ds
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">tutorial</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s1">&#39;air_temperature&#39;</span><span class="p">)</span>
+<span class="n">ds</span>
 </pre></div>
 </div>
 </div>
@@ -861,7 +861,7 @@ underlying array in the printout. You can also inspect
 them for a given dataset, <code class="docutils literal notranslate"><span class="pre">ds</span></code>, like so:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ds.dims
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">dims</span>
 </pre></div>
 </div>
 </div>
@@ -877,7 +877,7 @@ an integer datatype). That is, it maps a string to an integer
 You can see this by pulling one of the dims out directly:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ds.dims[&#39;lat&#39;]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -897,7 +897,7 @@ You can access them in a similar way to how the dimensions
 are accessed:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ds.coords
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">coords</span>
 </pre></div>
 </div>
 </div>
@@ -914,7 +914,7 @@ are accessed:</p>
 access it like you would a column in a pandas dataframe:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ds[&#39;time&#39;]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1314,7 +1314,7 @@ Attributes:
 that what you want is a coordinate:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ds.coords[&#39;time&#39;]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1719,7 +1719,7 @@ model is data should almost awlays come with the attached metadata
 so that you can easily understand what you’re looking at.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ds[&#39;air&#39;]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;air&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -2142,7 +2142,7 @@ the widget from the previous cell. You can also see them directly
 in the code via:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ds[&#39;air&#39;].attrs
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;air&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span>
 </pre></div>
 </div>
 </div>
@@ -2168,22 +2168,22 @@ but we can easily add a new variable, “pressure”, using our
 trusty function from the beginning of the course:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def air_pressure_at_height_and_temp(h, T0):
-    p0 = 101325      # reference pressure in pascals
-    M = 0.02896968   # molar mass of air kg/mol
-    g = 9.81         # gravity m/s^2
-    R0 = 8.314462618 # gas constant J/(mol·K) 
-    T = T0           # temp in kelvin
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">air_pressure_at_height_and_temp</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">T0</span><span class="p">):</span>
+    <span class="n">p0</span> <span class="o">=</span> <span class="mi">101325</span>      <span class="c1"># reference pressure in pascals</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="mf">0.02896968</span>   <span class="c1"># molar mass of air kg/mol</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="mf">9.81</span>         <span class="c1"># gravity m/s^2</span>
+    <span class="n">R0</span> <span class="o">=</span> <span class="mf">8.314462618</span> <span class="c1"># gas constant J/(mol·K) </span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">T0</span>           <span class="c1"># temp in kelvin</span>
 
-    ratio = -(g * h * M) / (R0 * T)
-    p_h = p0 * np.exp(ratio)
-    return p_h
+    <span class="n">ratio</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">g</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="n">M</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">R0</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span>
+    <span class="n">p_h</span> <span class="o">=</span> <span class="n">p0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">ratio</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">p_h</span>
 
-ds[&#39;pressure&#39;] = air_pressure_at_height_and_temp(2.0, ds[&#39;air&#39;])
-# Adding some metadata, this part is optional, but good practice!!
-ds[&#39;pressure&#39;].attrs[&#39;units&#39;] = &#39;Pa&#39;
-ds[&#39;pressure&#39;].attrs[&#39;long_name&#39;] = &#39;Standard air pressure at 2m&#39;
-ds
+<span class="n">ds</span><span class="p">[</span><span class="s1">&#39;pressure&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">air_pressure_at_height_and_temp</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;air&#39;</span><span class="p">])</span>
+<span class="c1"># Adding some metadata, this part is optional, but good practice!!</span>
+<span class="n">ds</span><span class="p">[</span><span class="s1">&#39;pressure&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;units&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Pa&#39;</span>
+<span class="n">ds</span><span class="p">[</span><span class="s1">&#39;pressure&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;long_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Standard air pressure at 2m&#39;</span>
+<span class="n">ds</span>
 </pre></div>
 </div>
 </div>
@@ -2674,7 +2674,7 @@ showing you this to make it clear that the data really does
 exist!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(type(ds[&#39;air&#39;].values), ds[&#39;air&#39;].values.shape)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;air&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">),</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;air&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2693,8 +2693,8 @@ Getting the first time:</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>first_time_isel = ds.isel(time=0)
-first_time_isel
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_time_isel</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">first_time_isel</span>
 </pre></div>
 </div>
 </div>
@@ -3116,9 +3116,9 @@ Attributes:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Similarly we could to this
-first_time_sel = ds.sel(time=&#39;2013-01-01 00:00&#39;)
-print(first_time_sel == first_time_isel)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Similarly we could to this</span>
+<span class="n">first_time_sel</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="s1">&#39;2013-01-01 00:00&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">first_time_sel</span> <span class="o">==</span> <span class="n">first_time_isel</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -3143,15 +3143,15 @@ to the points specified. Try running without that
 and see if you can figure out why the error occurs!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tucson_lat = 32.2540
-tucson_lon = 360.0 - 110.9742
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tucson_lat</span> <span class="o">=</span> <span class="mf">32.2540</span>
+<span class="n">tucson_lon</span> <span class="o">=</span> <span class="mf">360.0</span> <span class="o">-</span> <span class="mf">110.9742</span>
 
-tucson_ds = ds.sel(
-    lat=tucson_lat, 
-    lon=tucson_lon, 
-    method=&#39;nearest&#39;
-)
-tucson_ds
+<span class="n">tucson_ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span>
+    <span class="n">lat</span><span class="o">=</span><span class="n">tucson_lat</span><span class="p">,</span> 
+    <span class="n">lon</span><span class="o">=</span><span class="n">tucson_lon</span><span class="p">,</span> 
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span>
+<span class="p">)</span>
+<span class="n">tucson_ds</span>
 </pre></div>
 </div>
 </div>
@@ -3561,7 +3561,7 @@ make an intuitive type of plto for the dimensions that
 you give it to plot with, so here we get a timeseries.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tucson_ds[&#39;air&#39;].plot()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tucson_ds</span><span class="p">[</span><span class="s1">&#39;air&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -3579,7 +3579,7 @@ get the axis labels including human readable timestamps,
 understandable names, and units all in the plot automatically!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tucson_ds[&#39;pressure&#39;].plot()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tucson_ds</span><span class="p">[</span><span class="s1">&#39;pressure&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -3595,7 +3595,7 @@ you call “.plot()” on something. For instance, if we select
 out a particular time and plot it we get a map:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ds[&#39;air&#39;].isel(time=30).plot()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;air&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -3612,9 +3612,9 @@ out the temperature data for Tucson by taking the 30 day
 moving average we can do that with a “rolling” operation:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tucson_ds[&#39;air&#39;].plot(label=&#39;Original&#39;)
-tucson_ds[&#39;air&#39;].rolling(time=30).mean().plot(label=&#39;Smoothed&#39;)
-plt.legend()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tucson_ds</span><span class="p">[</span><span class="s1">&#39;air&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Original&#39;</span><span class="p">)</span>
+<span class="n">tucson_ds</span><span class="p">[</span><span class="s1">&#39;air&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Smoothed&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -3629,9 +3629,9 @@ plt.legend()
 average across time, which creates a new dimension and coordinate</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>season = tucson_ds[&#39;time&#39;].dt.season
-seasonal_avg_airtemp = ds[&#39;air&#39;].groupby(season).mean()
-seasonal_avg_airtemp
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">season</span> <span class="o">=</span> <span class="n">tucson_ds</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">season</span>
+<span class="n">seasonal_avg_airtemp</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;air&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">season</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">seasonal_avg_airtemp</span>
 </pre></div>
 </div>
 </div>
@@ -4123,7 +4123,7 @@ wrap to a new row after 2 columns. I’m also changing the colormap
 to make it easier to see the differences between seasons</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>seasonal_avg_airtemp.plot(col=&#39;season&#39;, col_wrap=2, cmap=&#39;turbo&#39;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seasonal_avg_airtemp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s1">&#39;season&#39;</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;turbo&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

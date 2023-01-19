@@ -342,13 +342,13 @@ title="Print to PDF"
 <h1>Introduction to the <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> API<a class="headerlink" href="#introduction-to-the-scikit-learn-api" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import urllib
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-# A NEW THING!!!
-from sklearn.linear_model import LinearRegression
+<span class="c1"># A NEW THING!!!</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
 </pre></div>
 </div>
 </div>
@@ -368,54 +368,54 @@ from sklearn.linear_model import LinearRegression
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def create_usgs_url(site_no, begin_date, end_date):
-    return (f&#39;https://waterdata.usgs.gov/nwis/dv?&#39;
-        f&#39;cb_00060=on&amp;format=rdb&amp;referred_module=sw&amp;&#39;
-        f&#39;site_no={site_no}&amp;&#39;
-        f&#39;begin_date={begin_date}&amp;&#39;
-        f&#39;end_date={end_date}&#39;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_usgs_url</span><span class="p">(</span><span class="n">site_no</span><span class="p">,</span> <span class="n">begin_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;https://waterdata.usgs.gov/nwis/dv?&#39;</span>
+        <span class="sa">f</span><span class="s1">&#39;cb_00060=on&amp;format=rdb&amp;referred_module=sw&amp;&#39;</span>
+        <span class="sa">f</span><span class="s1">&#39;site_no=</span><span class="si">{</span><span class="n">site_no</span><span class="si">}</span><span class="s1">&amp;&#39;</span>
+        <span class="sa">f</span><span class="s1">&#39;begin_date=</span><span class="si">{</span><span class="n">begin_date</span><span class="si">}</span><span class="s1">&amp;&#39;</span>
+        <span class="sa">f</span><span class="s1">&#39;end_date=</span><span class="si">{</span><span class="n">end_date</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
-def open_usgs_data(site, begin_date, end_date):
-    url = create_usgs_url((site), begin_date, end_date)
-    response = urllib.request.urlopen(url)
-    df = pd.read_table(
-        response, comment=&#39;#&#39;, skipfooter=1, delim_whitespace=True,
-        names=[&#39;agency&#39;, &#39;site&#39;, &#39;date&#39;, &#39;streamflow&#39;, &#39;quality_flag&#39;],
-        index_col=2, parse_dates=True).iloc[2:]
-    df[&#39;streamflow&#39;] = df[&#39;streamflow&#39;].astype(np.float64)
-    df.index = pd.DatetimeIndex(df.index)
-    return df
+<span class="k">def</span> <span class="nf">open_usgs_data</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">begin_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">create_usgs_url</span><span class="p">((</span><span class="n">site</span><span class="p">),</span> <span class="n">begin_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span>
+        <span class="n">response</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="n">skipfooter</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">delim_whitespace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;agency&#39;</span><span class="p">,</span> <span class="s1">&#39;site&#39;</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;streamflow&#39;</span><span class="p">,</span> <span class="s1">&#39;quality_flag&#39;</span><span class="p">],</span>
+        <span class="n">index_col</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;streamflow&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;streamflow&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
 
-def open_daymet_data(lat, lon, begin_date, end_date):
-    args = {&#39;lat&#39;:  lat, &#39;lon&#39;: lon, &#39;format&#39;: &#39;csv&#39;,
-            &#39;start&#39;: begin_date, &#39;end&#39;: end_date}
-    query = urllib.parse.urlencode(args)
-    url = f&quot;https://daymet.ornl.gov/single-pixel/api/data?{query}&quot;
-    response = urllib.request.urlopen(url)
-    df = pd.read_csv(response, header=6)
-    datestring = (df[&#39;year&#39;].astype(str) + df[&#39;yday&#39;].astype(str))
-    dates = pd.to_datetime(datestring, format=&#39;%Y%j&#39;)
-    df.index = pd.DatetimeIndex(dates)
-    return df
+<span class="k">def</span> <span class="nf">open_daymet_data</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">begin_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">):</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;lat&#39;</span><span class="p">:</span>  <span class="n">lat</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">:</span> <span class="n">lon</span><span class="p">,</span> <span class="s1">&#39;format&#39;</span><span class="p">:</span> <span class="s1">&#39;csv&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;start&#39;</span><span class="p">:</span> <span class="n">begin_date</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">:</span> <span class="n">end_date</span><span class="p">}</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlencode</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://daymet.ornl.gov/single-pixel/api/data?</span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+    <span class="n">datestring</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;yday&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
+    <span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">datestring</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%Y%j&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>site = &#39;09506000&#39;
-begin_date = &#39;2000-09-25&#39;
-end_date = &#39;2022-09-25&#39;
-lat = 34.4483605
-lon = -111.7898705
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">site</span> <span class="o">=</span> <span class="s1">&#39;09506000&#39;</span>
+<span class="n">begin_date</span> <span class="o">=</span> <span class="s1">&#39;2000-09-25&#39;</span>
+<span class="n">end_date</span> <span class="o">=</span> <span class="s1">&#39;2022-09-25&#39;</span>
+<span class="n">lat</span> <span class="o">=</span> <span class="mf">34.4483605</span>
+<span class="n">lon</span> <span class="o">=</span> <span class="o">-</span><span class="mf">111.7898705</span>
 
-daymet_df = open_daymet_data(lat, lon, begin_date, end_date)
-daymet_df.head()
-verde_df = open_usgs_data(site, begin_date, end_date)
-daymet_df = daymet_df.reindex(verde_df.index)
-daymet_df[&#39;streamflow&#39;] = verde_df[&#39;streamflow&#39;]
-df = daymet_df
-df.head()
+<span class="n">daymet_df</span> <span class="o">=</span> <span class="n">open_daymet_data</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">begin_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">)</span>
+<span class="n">daymet_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">verde_df</span> <span class="o">=</span> <span class="n">open_usgs_data</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">begin_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">)</span>
+<span class="n">daymet_df</span> <span class="o">=</span> <span class="n">daymet_df</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">verde_df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">daymet_df</span><span class="p">[</span><span class="s1">&#39;streamflow&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">verde_df</span><span class="p">[</span><span class="s1">&#39;streamflow&#39;</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">daymet_df</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -539,10 +539,10 @@ df.head()
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df_monthly = df.resample(&#39;M&#39;).mean()
-df_monthly = df_monthly.dropna()
-df_monthly.plot.scatter(x=&#39;tmax (deg c)&#39;, y=&#39;streamflow&#39;)
-plt.semilogy()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_monthly</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">df_monthly</span> <span class="o">=</span> <span class="n">df_monthly</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">df_monthly</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;tmax (deg c)&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;streamflow&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -555,12 +555,12 @@ plt.semilogy()
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>lm = LinearRegression()
-x = df_monthly[[&#39;tmax (deg c)&#39;]]
-y = df_monthly[[&#39;streamflow&#39;]]
-lm.fit(x, y)
-xfit = np.linspace(np.min(x), np.max(x), 20).reshape(-1, 1)
-yfit = lm.predict(xfit)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lm</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">df_monthly</span><span class="p">[[</span><span class="s1">&#39;tmax (deg c)&#39;</span><span class="p">]]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_monthly</span><span class="p">[[</span><span class="s1">&#39;streamflow&#39;</span><span class="p">]]</span>
+<span class="n">lm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">xfit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">yfit</span> <span class="o">=</span> <span class="n">lm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">xfit</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -577,9 +577,9 @@ yfit = lm.predict(xfit)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df_monthly.plot.scatter(x=&#39;tmax (deg c)&#39;, y=&#39;streamflow&#39;)
-plt.plot(xfit, yfit, color=&#39;red&#39;)
-plt.semilogy()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_monthly</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;tmax (deg c)&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;streamflow&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xfit</span><span class="p">,</span> <span class="n">yfit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -592,10 +592,10 @@ plt.semilogy()
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>log_lm = LinearRegression()
-x = df_monthly[[&#39;tmax (deg c)&#39;]]
-ylog = np.log(df_monthly[[&#39;streamflow&#39;]])
-log_lm.fit(x, ylog)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_lm</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">df_monthly</span><span class="p">[[</span><span class="s1">&#39;tmax (deg c)&#39;</span><span class="p">]]</span>
+<span class="n">ylog</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">df_monthly</span><span class="p">[[</span><span class="s1">&#39;streamflow&#39;</span><span class="p">]])</span>
+<span class="n">log_lm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ylog</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -604,10 +604,10 @@ log_lm.fit(x, ylog)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>xfit = np.linspace(np.min(x), np.max(x), 20).reshape(-1, 1)
-# Remember we fit on log values, so we need to transform
-# from log(streamflow) -&gt; streamflow via the `np.exp` call
-yfit_log = np.exp(log_lm.predict(xfit))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xfit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Remember we fit on log values, so we need to transform</span>
+<span class="c1"># from log(streamflow) -&gt; streamflow via the `np.exp` call</span>
+<span class="n">yfit_log</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_lm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">xfit</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -624,11 +624,11 @@ yfit_log = np.exp(log_lm.predict(xfit))
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df_monthly.plot.scatter(x=&#39;tmax (deg c)&#39;, y=&#39;streamflow&#39;)
-plt.plot(xfit, yfit_log, color=&#39;maroon&#39;, label=&#39;fit on log values&#39;)
-plt.plot(xfit, yfit, color=&#39;darkgoldenrod&#39;, linestyle=&#39;--&#39;, label=&#39;fit on raw values&#39;)
-plt.legend()
-plt.semilogy()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_monthly</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;tmax (deg c)&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;streamflow&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xfit</span><span class="p">,</span> <span class="n">yfit_log</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;maroon&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;fit on log values&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xfit</span><span class="p">,</span> <span class="n">yfit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkgoldenrod&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;fit on raw values&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -641,10 +641,10 @@ plt.semilogy()
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>log_score = log_lm.score(x, ylog)
-reg_score = log_lm.score(x, y)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_score</span> <span class="o">=</span> <span class="n">log_lm</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ylog</span><span class="p">)</span>
+<span class="n">reg_score</span> <span class="o">=</span> <span class="n">log_lm</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
-print(log_score, reg_score)
+<span class="nb">print</span><span class="p">(</span><span class="n">log_score</span><span class="p">,</span> <span class="n">reg_score</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -656,9 +656,9 @@ print(log_score, reg_score)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>c = log_lm.coef_
-i = log_lm.intercept_
-print(c, i)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">log_lm</span><span class="o">.</span><span class="n">coef_</span>
+<span class="n">i</span> <span class="o">=</span> <span class="n">log_lm</span><span class="o">.</span><span class="n">intercept_</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
