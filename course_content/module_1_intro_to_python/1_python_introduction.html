@@ -177,6 +177,16 @@ const thebe_selector_output = ".output, .cell_output"
    </code>
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../module_6_xarray_and_big_data/xarray_exercises_pt2.html">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     xarray
+    </span>
+   </code>
+   exercises pt 2: ENSO Analysis
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -513,6 +523,13 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#importing-other-modules">
    Importing other modules
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-practical-example-calculating-air-pressure-at-a-given-height-and-temperature">
+     A practical example: Calculating air pressure at a given height and temperature
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#that-s-all-for-now">
@@ -713,6 +730,13 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#importing-other-modules">
    Importing other modules
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-practical-example-calculating-air-pressure-at-a-given-height-and-temperature">
+     A practical example: Calculating air pressure at a given height and temperature
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#that-s-all-for-now">
@@ -1947,6 +1971,64 @@ limit exceeded! x is now:
 </div>
 </div>
 </div>
+<section id="a-practical-example-calculating-air-pressure-at-a-given-height-and-temperature">
+<h3>A practical example: Calculating air pressure at a given height and temperature<a class="headerlink" href="#a-practical-example-calculating-air-pressure-at-a-given-height-and-temperature" title="Permalink to this headline">#</a></h3>
+<p>It’s worth diving a little bit deeper into functions in Python now that you’ve seen the basics, since they’re one of the most useful ways to organize research code. Any time you have a code block that you find yourself repeating in your analysis it’s a good idea to try to wrap it up into a function so that you don’t have to write the code from scratch all the time. Later in the course materials we’ll get more into ways to package code for reuse, which will rely on your knowledge of functions.</p>
+<p>To get a deeper understanding, let’s use a practical example: calculating air pressure for some given height above sea level. To do so, we’ll ignore the derivation and intuition for the moment so that we can focus on the basics of the code. We will, however, still rely on the mathematical notation used in the <a class="reference external" href="https://en.wikipedia.org/wiki/Atmospheric_pressure">Wikipedia page describing the overall relationship</a>.</p>
+<p>That is, to first order, we can describe the atmospheric pressure at a given height (for a reference temprature of 0C) as:</p>
+<div class="math notranslate nohighlight">
+\[
+p(h) = p_0 \cdot \text{exp} 
+    \left( 
+        \frac{-g \cdot h \cdot M}{R_0 \cdot T_{0} }
+    \right)
+\]</div>
+<p>To calcluate the quantity <span class="math notranslate nohighlight">\(p(h)\)</span> we must fill in some of the constants that are used in the equation. We will use some default values given as:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(p_0\)</span>: 101,325 <span class="math notranslate nohighlight">\(Pa\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(g\)</span>: 9.81 <span class="math notranslate nohighlight">\(m/s^2\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(M\)</span>: 0.02897 <span class="math notranslate nohighlight">\(kg/mol\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(R_0\)</span>: 8.314 <span class="math notranslate nohighlight">\(J/(mol\cdot K)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(T\)</span>: 273.15 <span class="math notranslate nohighlight">\(K\)</span></p></li>
+</ul>
+<p>Given all of these constants, which are defined inside of the function, we can then calculate the air pressure at many different heights.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">air_pressure_at_height</span><span class="p">(</span><span class="n">h</span><span class="p">):</span>
+    <span class="n">p0</span> <span class="o">=</span> <span class="mi">101325</span>      <span class="c1"># reference pressure in pascals</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="mf">0.02897</span>      <span class="c1"># molar mass of air kg/mol</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="mf">9.81</span>         <span class="c1"># gravity m/s2</span>
+    <span class="n">R0</span> <span class="o">=</span> <span class="mf">8.314</span>       <span class="c1"># gas constant J/(mol·K) </span>
+    <span class="n">T</span> <span class="o">=</span> <span class="mf">273.15</span>       <span class="c1"># temp in kelvin</span>
+
+    <span class="n">ratio</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">g</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="n">M</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">R0</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span>
+    <span class="n">p_h</span> <span class="o">=</span> <span class="n">p0</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">ratio</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">p_h</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see how this plays out by defining a list of different height that we might want to run the function over. For the sake of completeness and simplicity we can just define a list of heights spanning a range of orders of magnitude. To apply the function we’ll make use of our newly-introduced “for-loop” to calculate the air pressure over this range of heights given our function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">heights</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="mf">10_000.0</span><span class="p">]</span>
+<span class="n">pressures</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">heights</span><span class="p">:</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">air_pressure_at_height</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+    <span class="n">pressures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">pressures</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[101325.0, 101198.27824646293, 100064.89051681198, 89406.21997766777, 28988.63892166232]
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you look hard enough at the numbers above you might note that they decrease exponentially as the elevation increases, just as we might expect. It is always worth making sure that your calculations reflect the overall trend that you expect. As we get more into numerical approaches and data visualization techniques you will gain skills on methods for verifying your code is operating as expected, but take a moment to double check if the output throughout this section makes sense given the numbers we put into the equations.</p>
+</section>
 </section>
 <section id="that-s-all-for-now">
 <h2>That’s all for now<a class="headerlink" href="#that-s-all-for-now" title="Permalink to this headline">#</a></h2>
