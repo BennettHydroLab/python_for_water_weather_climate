@@ -10,3 +10,4 @@ chapters:
 - file: course_content/module_4_modeling_with_scikit_learn/1_intro_to_sklearn.ipynb
 - file: course_content/module_5_geopandas_for_gis/1_intro_to_geopandas.ipynb
 - file: course_content/module_6_xarray_and_big_data/1_intro_to_xarray.ipynb
+- file: course_content/module_6_xarray_and_big_data/xarray_exercises_pt2.ipynb
