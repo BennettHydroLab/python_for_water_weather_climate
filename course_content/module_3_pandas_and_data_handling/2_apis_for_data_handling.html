@@ -52,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Introduction to the scikit-learn API" href="../module_4_modeling_with_scikit_learn/1_intro_to_sklearn.html" />
+    <link rel="next" title="Intro to xarray" href="../module_6_xarray_and_big_data/1_intro_to_xarray.html" />
     <link rel="prev" title="Introduction to pandas" href="1_intro_to_pandas.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -115,6 +115,11 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="../module_1_intro_to_python/2_python_stuff_you_should_know.html">
+   Intermediate python - Or, stuff you should know
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../module_2_numpy_and_matplotlib/1_intro_to_numpy.html">
    Introduction to numpy
   </a>
@@ -142,27 +147,6 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Some lessons on working with real world data: APIs and data wrangling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../module_4_modeling_with_scikit_learn/1_intro_to_sklearn.html">
-   Introduction to the
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     scikit-learn
-    </span>
-   </code>
-   API
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../module_5_geopandas_for_gis/1_intro_to_geopandas.html">
-   Introduction to GIS in python with
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     geopandas
-    </span>
-   </code>
   </a>
  </li>
  <li class="toctree-l1">
@@ -373,32 +357,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>A quick detour on ‘f-strings’
-In python there is a really nice way to insert values
-from variables into a string variable. This task is
-referred to in programming as string formatting. In the
-past there were other ways to do this in python, but
-a few years ago they added this approach which is generally
-seen as the best way to do this. For an overview see this:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://realpython.com/python-f-strings/">https://realpython.com/python-f-strings/</a></p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random_numbers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The average of my random numbers is&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">random_numbers</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The average of my random numbers is </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">random_numbers</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The average of my random numbers is 0.496355432301511
-The average of my random numbers is 0.496355432301511
-</pre></div>
-</div>
-</div>
-</div>
-<p>With that out of the way let’s start to work towards being able
+<p>Let’s start to work towards being able
 to grab data on the fly from the USGS website. And now we’ve defined
 the site id for the Verde River, as well as some start and end dates
 to get the data for. With those defined clearly it makes it much
@@ -572,7 +531,7 @@ You can do all of the standard pandas stuff</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/2_apis_for_data_handling_13_1.png" src="../../_images/2_apis_for_data_handling_13_1.png" />
+<img alt="../../_images/2_apis_for_data_handling_11_1.png" src="../../_images/2_apis_for_data_handling_11_1.png" />
 </div>
 </div>
 <p>Now, you might be thinking… why only one year of data?!
@@ -636,7 +595,7 @@ to your homework</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/2_apis_for_data_handling_16_2.png" src="../../_images/2_apis_for_data_handling_16_2.png" />
+<img alt="../../_images/2_apis_for_data_handling_14_2.png" src="../../_images/2_apis_for_data_handling_14_2.png" />
 </div>
 </div>
 <p>Hmm, 20 years of daily data starts to blend together.
@@ -659,7 +618,7 @@ Let’s just resample the data down to monthly means like so:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/2_apis_for_data_handling_18_2.png" src="../../_images/2_apis_for_data_handling_18_2.png" />
+<img alt="../../_images/2_apis_for_data_handling_16_2.png" src="../../_images/2_apis_for_data_handling_16_2.png" />
 </div>
 </div>
 <p>Now, let’s look at some DayMet data.
@@ -970,7 +929,7 @@ USGS database. Finally, for shorthand I just rename the whole thing <code class=
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
 </pre></div>
 </div>
-<img alt="../../_images/2_apis_for_data_handling_30_1.png" src="../../_images/2_apis_for_data_handling_30_1.png" />
+<img alt="../../_images/2_apis_for_data_handling_28_1.png" src="../../_images/2_apis_for_data_handling_28_1.png" />
 </div>
 </div>
 </section>
@@ -987,7 +946,7 @@ USGS database. Finally, for shorthand I just rename the whole thing <code class=
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./course_content/module_3_pandas_and_data_handling"
         },
         predefinedOutput: true
@@ -1009,10 +968,10 @@ USGS database. Finally, for shorthand I just rename the whole thing <code class=
             <p class="prev-next-title">Introduction to <code class="docutils literal notranslate"><span class="pre">pandas</span></code></p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../module_4_modeling_with_scikit_learn/1_intro_to_sklearn.html" title="next page">
+    <a class='right-next' id="next-link" href="../module_6_xarray_and_big_data/1_intro_to_xarray.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Introduction to the <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> API</p>
+        <p class="prev-next-title">Intro to <code class="docutils literal notranslate"><span class="pre">xarray</span></code></p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

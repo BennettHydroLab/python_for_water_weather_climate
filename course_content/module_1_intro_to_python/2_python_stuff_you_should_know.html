@@ -1,0 +1,688 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Intermediate python - Or, stuff you should know &#8212; Python for water, weather, and climate science</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Introduction to numpy" href="../module_2_numpy_and_matplotlib/1_intro_to_numpy.html" />
+    <link rel="prev" title="Introduction to python" href="1_python_introduction.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Python for water, weather, and climate science</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    Python for research in Water, Weather, and Climate
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1_python_introduction.html">
+   Introduction to python
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Intermediate python - Or, stuff you should know
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../module_2_numpy_and_matplotlib/1_intro_to_numpy.html">
+   Introduction to numpy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../module_2_numpy_and_matplotlib/2_intro_to_matplotlib.html">
+   Getting started with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     matplotlib
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../module_3_pandas_and_data_handling/1_intro_to_pandas.html">
+   Introduction to
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     pandas
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../module_3_pandas_and_data_handling/2_apis_for_data_handling.html">
+   Some lessons on working with real world data: APIs and data wrangling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../module_6_xarray_and_big_data/1_intro_to_xarray.html">
+   Intro to
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     xarray
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../module_6_xarray_and_big_data/xarray_exercises_pt2.html">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     xarray
+    </span>
+   </code>
+   exercises pt 2: ENSO Analysis
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/course_content/module_1_intro_to_python/2_python_stuff_you_should_know.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/course_content/module_1_intro_to_python/2_python_stuff_you_should_know.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#comprehensions">
+   Comprehensions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-iteration-tricks">
+   Some iteration tricks
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#keeping-track-of-indices-with-enumerate">
+     Keeping track of indices with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       enumerate
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#iterating-through-multiple-sequences-with-zip">
+     Iterating through multiple sequences with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       zip
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#iterating-through-dictionaries-keys-values-and-items">
+     Iterating through dictionaries:
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       keys()
+      </span>
+     </code>
+     ,
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       values()
+      </span>
+     </code>
+     , and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       items()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#selective-iteration-break-and-continue">
+     Selective iteration:
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       break
+      </span>
+     </code>
+     and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       continue
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#f-strings">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     f
+    </span>
+   </code>
+   -Strings
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multi-argument-functions">
+   Multi-argument functions
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Intermediate python - Or, stuff you should know</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#comprehensions">
+   Comprehensions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-iteration-tricks">
+   Some iteration tricks
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#keeping-track-of-indices-with-enumerate">
+     Keeping track of indices with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       enumerate
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#iterating-through-multiple-sequences-with-zip">
+     Iterating through multiple sequences with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       zip
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#iterating-through-dictionaries-keys-values-and-items">
+     Iterating through dictionaries:
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       keys()
+      </span>
+     </code>
+     ,
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       values()
+      </span>
+     </code>
+     , and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       items()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#selective-iteration-break-and-continue">
+     Selective iteration:
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       break
+      </span>
+     </code>
+     and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       continue
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#f-strings">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     f
+    </span>
+   </code>
+   -Strings
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multi-argument-functions">
+   Multi-argument functions
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="intermediate-python-or-stuff-you-should-know">
+<h1>Intermediate python - Or, stuff you should know<a class="headerlink" href="#intermediate-python-or-stuff-you-should-know" title="Permalink to this headline">#</a></h1>
+<p>Now that you’ve seen the basics of python syntax, control flow, and data structures, it’s worth diving into a few key aspects of the language that will improve your quality of life when writing notebooks and simple scripts.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This section is not strictly necessary for succesfully progressing in the material, but we will be using these concepts and code-constructs throughout the coming chapters. Mainly, we will try to use these concepts to simplify some code so that you can focus on the core concepts for each chapter, but being able to understand them in their own right will be useful when writing your own code.</p>
+</div>
+<section id="comprehensions">
+<h2>Comprehensions<a class="headerlink" href="#comprehensions" title="Permalink to this headline">#</a></h2>
+<p>As motivation here, suppose you want to just apply some simple function to a list of inputs. Perhaps you just want to take the squares of a bunch of numbers. Given what you know from the previous section, you should be able to work out a basic <code class="docutils literal notranslate"><span class="pre">for</span></code> loop solution that might look like the following:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">input_numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">19</span><span class="p">]</span>
+<span class="n">squared_numbers</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">input_numbers</span><span class="p">:</span>
+    <span class="n">squared_numbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">squared_numbers</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[4, 25, 81, 196, 361]
+</pre></div>
+</div>
+</div>
+</div>
+<p>This probably feels like a lot of code to write for performing such a simple operation, and you’d be right for having that thought. Most high-level programming languages have tricks to avoid writing verbose code, and python is no difference. The way that we can do that here is to use what’s called a “list comprehension”. Without getting too in the weeds, you can just imagine putting the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop inside of the brackets (<code class="docutils literal notranslate"><span class="pre">[</span></code> and <code class="docutils literal notranslate"><span class="pre">]</span></code>) that define a list. Let’s just see the translation to keep things concrete:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">squared_numbers</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">input_numbers</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">squared_numbers</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[4, 25, 81, 196, 361]
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see this is a much simpler way to perform the same computation, thought it does come at the cost of generality and requires you to remember the syntax for writing list comprehensions. As a general rule of thumb, list comprehensions are mainly useful for making your code more readable, but don’t offer any large performance benefits or new functionality that can’t be achieved with a regular <code class="docutils literal notranslate"><span class="pre">for</span></code> loop. We will be using list comprehensions in the example code to keep things concise.</p>
+</section>
+<section id="some-iteration-tricks">
+<h2>Some iteration tricks<a class="headerlink" href="#some-iteration-tricks" title="Permalink to this headline">#</a></h2>
+<section id="keeping-track-of-indices-with-enumerate">
+<h3>Keeping track of indices with <code class="docutils literal notranslate"><span class="pre">enumerate</span></code><a class="headerlink" href="#keeping-track-of-indices-with-enumerate" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="iterating-through-multiple-sequences-with-zip">
+<h3>Iterating through multiple sequences with <code class="docutils literal notranslate"><span class="pre">zip</span></code><a class="headerlink" href="#iterating-through-multiple-sequences-with-zip" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="iterating-through-dictionaries-keys-values-and-items">
+<h3>Iterating through dictionaries: <code class="docutils literal notranslate"><span class="pre">keys()</span></code>, <code class="docutils literal notranslate"><span class="pre">values()</span></code>, and <code class="docutils literal notranslate"><span class="pre">items()</span></code><a class="headerlink" href="#iterating-through-dictionaries-keys-values-and-items" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="selective-iteration-break-and-continue">
+<h3>Selective iteration: <code class="docutils literal notranslate"><span class="pre">break</span></code> and <code class="docutils literal notranslate"><span class="pre">continue</span></code><a class="headerlink" href="#selective-iteration-break-and-continue" title="Permalink to this headline">#</a></h3>
+</section>
+</section>
+<section id="f-strings">
+<h2><code class="docutils literal notranslate"><span class="pre">f</span></code>-Strings<a class="headerlink" href="#f-strings" title="Permalink to this headline">#</a></h2>
+<p>In python there is a really nice way to insert values
+from variables into a string variable. This task is
+referred to in programming as string formatting. In the
+past there were other ways to do this in python, but
+a few years ago they added this approach which is generally
+seen as the best way to do this. For an overview see this:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://realpython.com/python-f-strings/">https://realpython.com/python-f-strings/</a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">some_numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The average of my random numbers is&#39;</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">some_numbers</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">some_numbers</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The average of my random numbers is </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">some_numbers</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">some_numbers</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The average of my random numbers is 29.25
+The average of my random numbers is 29.25
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="multi-argument-functions">
+<h2>Multi-argument functions<a class="headerlink" href="#multi-argument-functions" title="Permalink to this headline">#</a></h2>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./course_content/module_1_intro_to_python"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="1_python_introduction.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Introduction to python</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../module_2_numpy_and_matplotlib/1_intro_to_numpy.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction to numpy</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Andrew Bennett<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

@@ -50,10 +50,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Getting started with matplotlib" href="2_intro_to_matplotlib.html" />
-    <link rel="prev" title="Introduction to python" href="../module_1_intro_to_python/1_python_introduction.html" />
+    <link rel="prev" title="Intermediate python - Or, stuff you should know" href="../module_1_intro_to_python/2_python_stuff_you_should_know.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -114,6 +116,11 @@ const thebe_selector_output = ".output, .cell_output"
    Introduction to python
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../module_1_intro_to_python/2_python_stuff_you_should_know.html">
+   Intermediate python - Or, stuff you should know
+  </a>
+ </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Introduction to numpy
@@ -142,27 +149,6 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="../module_3_pandas_and_data_handling/2_apis_for_data_handling.html">
    Some lessons on working with real world data: APIs and data wrangling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../module_4_modeling_with_scikit_learn/1_intro_to_sklearn.html">
-   Introduction to the
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     scikit-learn
-    </span>
-   </code>
-   API
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../module_5_geopandas_for_gis/1_intro_to_geopandas.html">
-   Introduction to GIS in python with
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     geopandas
-    </span>
-   </code>
   </a>
  </li>
  <li class="toctree-l1">
@@ -350,56 +336,42 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#">
    Introduction to numpy
   </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-else-can-you-do-with-numpy-basically-anything-with-numbers">
+     What else can you do with numpy? Basically anything with numbers!
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#what-else-can-you-do-with-numpy-basically-anything-with-numbers">
-   What else can you do with numpy? Basically anything with numbers!
+  <a class="reference internal nav-link" href="#todo-update-link">
+   TODO: Update link ^^^
   </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#numpy-also-makes-math-easier-to-do-now-you-can-just-multiply-numbers-and-any-ndarray-object">
-   Numpy also makes math easier to do, now you can just multiply numbers and any ndarray object
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#you-can-also-operate-on-arrays-with-other-numpy-functions">
-   You can also operate on arrays with other numpy functions
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#you-can-create-random-numbers-too">
-   You can create random numbers too
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#numpy-is-really-good-for-linear-algebra">
-   Numpy is really good for linear algebra
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#and-there-are-a-ton-of-operations-you-can-usually-find-what-you-need-by-searching-online-for-numpy-whatever-function-you-want">
-   And there are a ton of operations, you can usually find what you need by searching online for “numpy (whatever function you want)”
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#finally-let-s-talk-about-slicing-and-indexing">
-   Finally, let’s talk about slicing and indexing
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#like-lists-you-can-index-arrays-directly">
-   Like lists you can index arrays directly
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#for-multidimensional-arrays-indexing-works-a-bit-differently">
-   For multidimensional arrays indexing works a  bit differently
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#arrays-can-be-of-large-dimension-up-to-i-think-64">
-   Arrays can be of large dimension (up to, I think, 64)
-  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#array-creation-functions">
+     Array creation functions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#array-transformation-functions">
+     Array transformation functions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#aggregation-functions">
+     Aggregation functions
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#array-indexing-and-slicing">
+       Array indexing and slicing
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -424,56 +396,42 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#">
    Introduction to numpy
   </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-else-can-you-do-with-numpy-basically-anything-with-numbers">
+     What else can you do with numpy? Basically anything with numbers!
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#what-else-can-you-do-with-numpy-basically-anything-with-numbers">
-   What else can you do with numpy? Basically anything with numbers!
+  <a class="reference internal nav-link" href="#todo-update-link">
+   TODO: Update link ^^^
   </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#numpy-also-makes-math-easier-to-do-now-you-can-just-multiply-numbers-and-any-ndarray-object">
-   Numpy also makes math easier to do, now you can just multiply numbers and any ndarray object
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#you-can-also-operate-on-arrays-with-other-numpy-functions">
-   You can also operate on arrays with other numpy functions
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#you-can-create-random-numbers-too">
-   You can create random numbers too
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#numpy-is-really-good-for-linear-algebra">
-   Numpy is really good for linear algebra
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#and-there-are-a-ton-of-operations-you-can-usually-find-what-you-need-by-searching-online-for-numpy-whatever-function-you-want">
-   And there are a ton of operations, you can usually find what you need by searching online for “numpy (whatever function you want)”
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#finally-let-s-talk-about-slicing-and-indexing">
-   Finally, let’s talk about slicing and indexing
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#like-lists-you-can-index-arrays-directly">
-   Like lists you can index arrays directly
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#for-multidimensional-arrays-indexing-works-a-bit-differently">
-   For multidimensional arrays indexing works a  bit differently
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#arrays-can-be-of-large-dimension-up-to-i-think-64">
-   Arrays can be of large dimension (up to, I think, 64)
-  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#array-creation-functions">
+     Array creation functions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#array-transformation-functions">
+     Array transformation functions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#aggregation-functions">
+     Aggregation functions
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#array-indexing-and-slicing">
+       Array indexing and slicing
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -487,22 +445,13 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-numpy">
 <h1>Introduction to numpy<a class="headerlink" href="#introduction-to-numpy" title="Permalink to this headline">#</a></h1>
-<p>The numpy library is short for “numerical python”
-In this script I will motivate numpy as well
-as provide an introduction to it’s functionality
-Numpy is a huge library with tons of capabilities
-so there will be a lot we don’t cover.
-The numpy documentation is excellent though:
-<a class="reference external" href="https://numpy.org/doc/stable/">https://numpy.org/doc/stable/</a></p>
-<p>There is also a really good quickstart guide
-that covers many of the things we will see here too:
-<a class="reference external" href="https://numpy.org/doc/stable/user/quickstart.html">https://numpy.org/doc/stable/user/quickstart.html</a></p>
-<p>To start with numpy you can import it. The
-line <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code> is the standard way
-to import it. This just renames <code class="docutils literal notranslate"><span class="pre">numpy</span></code> as <code class="docutils literal notranslate"><span class="pre">np</span></code>
-to save you time on typing
-I’m also importing math so that we can compare
-and finally the function from the previous script</p>
+<p>The numpy library is short for “numerical python” In this notebook I will motivate numpy and as demonstrate aspects of it’s functionality Numpy is a huge library with tons of capabilities so there will be a lot we don’t cover. The numpy documentation is excellent for when you need to dive in deeper: <a class="reference external" href="https://numpy.org/doc/stable/">https://numpy.org/doc/stable/</a></p>
+<p>There is also a really nice quickstart guide that covers many of the things we will see here and helps to reinforce key concepts in a concise way: <a class="reference external" href="https://numpy.org/doc/stable/user/quickstart.html">https://numpy.org/doc/stable/user/quickstart.html</a></p>
+<p>To start with numpy you can import it. The  line <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code> is the standard way to import it. This just renames <code class="docutils literal notranslate"><span class="pre">numpy</span></code> as <code class="docutils literal notranslate"><span class="pre">np</span></code> to save you time on typing I’m also importing math so that we can compare and finally the function from the end of the <span class="xref myst">introduction to python</span> notebook from this course.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are following this material on GitHub codespaces or via the provided Docker container/Conda environment this import line should just work. If you are following along with your own computer and python installation (or if the words Docker/Conda don’t ring a bell) you may have to install <code class="docutils literal notranslate"><span class="pre">numpy</span></code> separately. <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, like many of the python packages that we’ll use in this course are actually externally developed and not included int the basic python installation. You can think of these packages like browser extensions or plugins for CAD/GIS software.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
@@ -539,6 +488,22 @@ and finally the function from the previous script</p>
 </div>
 </div>
 </div>
+<p>With the same function defined as before we can go ahead and calculate the pressure for many different altitudes. We’ll do this for 20 thousand evenly spaced altitudes using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop. Additionally, we’ll time how long this took to run by using the <code class="docutils literal notranslate"><span class="pre">time</span></code> library, which is included in your base python  installation.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There are many ways to measure the performance of python programs, and simply timing how long certain portions take to run is the most basic. This is a very common “idiom” that you might find repeated in different context so it’s worth pointing out the basic structure of this so that you can easily use it in your own code. Given that you have the <code class="docutils literal notranslate"><span class="pre">time</span></code> module imported, the way to measure the elapsed time for a section of code is simply:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Possibly some setup code, that you don&#39;t want to measure</span>
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="c1"># --&gt; Your code here &lt;--</span>
+
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">delta_t</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Your code took: </span><span class="si">{</span><span class="n">delta_t</span><span class="si">:</span><span class="s2">06f</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Heights to calculate pressure at</span>
@@ -553,48 +518,43 @@ and finally the function from the previous script</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> 
 <span class="n">h_list</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
-<span class="n">p_list</span> <span class="o">=</span> <span class="p">[]</span> 
-
-<span class="k">for</span> <span class="n">height</span> <span class="ow">in</span> <span class="n">h_list</span><span class="p">:</span> 
-    <span class="n">p_h</span> <span class="o">=</span> <span class="n">air_pressure_at_height</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
-    <span class="n">p_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p_h</span><span class="p">)</span> 
+<span class="n">p_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">air_pressure_at_height</span><span class="p">(</span><span class="n">height</span><span class="p">)</span> <span class="k">for</span> <span class="n">height</span> <span class="ow">in</span> <span class="n">h_list</span><span class="p">]</span>
 
 <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">base_python_time</span> <span class="o">=</span> <span class="n">t1</span><span class="o">-</span><span class="n">t0</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;With plain python this took:&quot;</span><span class="p">,</span> <span class="n">base_python_time</span><span class="p">,</span> <span class="s2">&quot; seconds&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;With plain python this took: </span><span class="si">{</span><span class="n">base_python_time</span><span class="si">:</span><span class="s2">06f</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>With plain python this took: 0.04263567924499512  seconds
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>With plain python this took: 0.058572 seconds
 </pre></div>
 </div>
 </div>
 </div>
+<p>Okay, so you might be quite happy with that result, we ran a decently complex calculation many thousands of times and it took well under a second. But, the reality is python is generally considered a very slow programming language, and as your scripts become more advanced you will likely be interested in speeding up your calculations. This is one of the main reasons that you will want to become fluent in using <code class="docutils literal notranslate"><span class="pre">numpy</span></code>. Additionally, using <code class="docutils literal notranslate"><span class="pre">numpy</span></code> allows you to avoid writing loops or comprehensions, which makes your code even shorter and more easily understood. Below is the <code class="docutils literal notranslate"><span class="pre">numpy</span></code> version, which you will see is many times faster.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">h_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
 <span class="n">p_array</span> <span class="o">=</span> <span class="n">air_pressure_at_height</span><span class="p">(</span><span class="n">h_array</span><span class="p">)</span>
+
 <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">numpy_time</span> <span class="o">=</span> <span class="n">t1</span><span class="o">-</span><span class="n">t0</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;With numpy this took:&quot;</span><span class="p">,</span> <span class="n">numpy_time</span><span class="p">,</span> <span class="s2">&quot; seconds&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Numpy version is &quot;</span><span class="p">,</span> <span class="n">base_python_time</span><span class="o">/</span><span class="n">numpy_time</span><span class="p">,</span> <span class="s2">&quot; times faster&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;With numpy this took: </span><span class="si">{</span><span class="n">numpy_time</span><span class="si">:</span><span class="s2">06f</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Numpy version is  </span><span class="si">{</span><span class="n">base_python_time</span><span class="o">/</span><span class="n">numpy_time</span><span class="si">:</span><span class="s2">06f</span><span class="si">}</span><span class="s2"> times faster&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>With numpy this took: 0.0008068084716796875  seconds
-Numpy version is  52.844858156028366  times faster
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>With numpy this took: 0.002483 seconds
+Numpy version is  23.585733 times faster
 </pre></div>
 </div>
 </div>
 </div>
-<p>Okay, so how did that work?
-Numpy is an “array-based” library, meaning it defines the “array” type
-Here you can see we have <code class="docutils literal notranslate"><span class="pre">h_array</span></code> is an <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>, which means
-N-dimensional array. In our case N=1. We can also look at the shape
-NOTE: The length of the shape is always equal to the number of dimensions</p>
+<p>Okay, so how did that work? Numpy is an “array-based” library, meaning it defines the “array” type. By printing out the <code class="docutils literal notranslate"><span class="pre">type</span></code> you can see we have <code class="docutils literal notranslate"><span class="pre">h_array</span></code> is an <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>, which means  N-dimensional array. In our case N=1, which you may be familiar being referred to as a vector in math class. We can also look at the shape of our arrays using the <code class="docutils literal notranslate"><span class="pre">.ndim</span></code> and <code class="docutils literal notranslate"><span class="pre">.shape</span></code> attributes. These are very handle for getting summaries of what is stored in your arrays as your programs grow in complexity. Note that the length of the shape is always equal to the number of dimensions</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">h_array</span><span class="p">))</span>
@@ -613,12 +573,13 @@ True
 </div>
 </div>
 </div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="what-else-can-you-do-with-numpy-basically-anything-with-numbers">
-<h1>What else can you do with numpy? Basically anything with numbers!<a class="headerlink" href="#what-else-can-you-do-with-numpy-basically-anything-with-numbers" title="Permalink to this headline">#</a></h1>
+<section id="what-else-can-you-do-with-numpy-basically-anything-with-numbers">
+<h2>What else can you do with numpy? Basically anything with numbers!<a class="headerlink" href="#what-else-can-you-do-with-numpy-basically-anything-with-numbers" title="Permalink to this headline">#</a></h2>
+<p>As mentioned, <code class="docutils literal notranslate"><span class="pre">numpy</span></code> means <code class="docutils literal notranslate"><span class="pre">numerical</span> <span class="pre">python</span></code> and has become basically <em>the</em> base of the scientific python stack of tools. Almost everything we will use from here on out uses <code class="docutils literal notranslate"><span class="pre">numpy</span></code> under the hood, and in many cases as you write custom algorithms it will be useful for you to know how to “drop down” from more advanced tools into the <code class="docutils literal notranslate"><span class="pre">numpy</span></code> way of writing code. With that in mind, let’s get on with our super-brief overview.</p>
+<p>When creating new arrays with <code class="docutils literal notranslate"><span class="pre">numpy</span></code> you will probably be using a built-in feature where you specify what values to initialize your new array with, as well as the “shape”. In this case the “shape” is specified by a sequence (i.e. either a list or tuple) of values where each of the values corresponds to a length along a particular dimension/axis. This is all rather abstract, so let’s make a concrete example. If you wanted a 2 by 5 array of ones you would simple do the following:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">array_shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">array_shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 
 <span class="c1"># Create an array of all ones with a specific shape</span>
 <span class="n">ones_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">array_shape</span><span class="p">)</span>
@@ -630,295 +591,222 @@ True
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1. 1. 1. 1. 1.]
- [1. 1. 1. 1. 1.]
- [1. 1. 1. 1. 1.]
- [1. 1. 1. 1. 1.]
  [1. 1. 1. 1. 1.]]
-(5, 5)
+(2, 5)
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="numpy-also-makes-math-easier-to-do-now-you-can-just-multiply-numbers-and-any-ndarray-object">
-<h1>Numpy also makes math easier to do, now you can just multiply numbers and any ndarray object<a class="headerlink" href="#numpy-also-makes-math-easier-to-do-now-you-can-just-multiply-numbers-and-any-ndarray-object" title="Permalink to this headline">#</a></h1>
+<p>Similarly, if you want a 3d cube of of zeros where each side has 3 values you could do the following:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">array_shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">zero_cube</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">array_shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">zero_cube</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[[0. 0. 0.]
+  [0. 0. 0.]
+  [0. 0. 0.]]
+
+ [[0. 0. 0.]
+  [0. 0. 0.]
+  [0. 0. 0.]]
+
+ [[0. 0. 0.]
+  [0. 0. 0.]
+  [0. 0. 0.]]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>With all of these numbers inside of our <code class="docutils literal notranslate"><span class="pre">numpy</span></code> arrays you might begin to worry how we are going to operate on all of these values without writing tons of complicated for loops and conditionals, but <code class="docutils literal notranslate"><span class="pre">numpy</span></code> also makes math easier to write with python. As you already saw in the very first example though, <code class="docutils literal notranslate"><span class="pre">numpy</span></code> does this by smartly applying functions and operations to all elements in an array. At it’s most basic level this will happen element-wise, as we saw previously. To demonstrate this again, we can simply multilply our <code class="docutils literal notranslate"><span class="pre">ones_matrix</span></code> by a scalar value and it will automatically do the right thing. Operating on the arrays directly, rather than manually iterating over the values individually is commonly referred to as “vectorization” in the <code class="docutils literal notranslate"><span class="pre">numpy</span></code> world.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mf">0.1</span> <span class="o">*</span> <span class="n">ones_matrix</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.1 0.1 0.1 0.1 0.1]
- [0.1 0.1 0.1 0.1 0.1]
- [0.1 0.1 0.1 0.1 0.1]
- [0.1 0.1 0.1 0.1 0.1]
  [0.1 0.1 0.1 0.1 0.1]]
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="you-can-also-operate-on-arrays-with-other-numpy-functions">
-<h1>You can also operate on arrays with other numpy functions<a class="headerlink" href="#you-can-also-operate-on-arrays-with-other-numpy-functions" title="Permalink to this headline">#</a></h1>
-<p>First we’ll cover some handy functions:</p>
+<p>Similarly, since we’re talking about matrices, you can also perform common operations from linear algebra, such as computing the multiplication of the transpose of a matrix by itself (i.e. <span class="math notranslate nohighlight">\(A^TA\)</span>), and <code class="docutils literal notranslate"><span class="pre">numpy</span></code> will figure out the rest for you.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ones_matrix</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ones_matrix</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-
-<span class="c1"># Create an array from a list</span>
-<span class="n">sample_1d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
-<span class="n">sample_2d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-    <span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span>
-     <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]]</span>
-<span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">sample_1d</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">sample_2d</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">()</span> <span class="c1">#creates a space bettewn the resutls</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sample_2d</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ones_matrix</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">ones_matrix</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25.0
-[5. 5. 5. 5. 5.]
-[0 1 2]
-
-[[0 1 2]
- [3 4 5]]
-
-[ 3 12]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[2., 2., 2., 2., 2.],
+       [2., 2., 2., 2., 2.],
+       [2., 2., 2., 2., 2.],
+       [2., 2., 2., 2., 2.],
+       [2., 2., 2., 2., 2.]])
 </pre></div>
 </div>
 </div>
 </div>
+<p>This is all figured out by <code class="docutils literal notranslate"><span class="pre">numpy</span></code> using rules for “broadcasting” computations along different shaped arrays. The topic of how broadcasting works is beyond the scope for this course, but as usual, <span class="xref myst">the documetnation</span> provides a good starting point for a deeper dive.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="todo-update-link">
+<h1>TODO: Update link ^^^<a class="headerlink" href="#todo-update-link" title="Permalink to this headline">#</a></h1>
+<p>The benefits of broadcasting and vectorization extend to many of the built in functions that <code class="docutils literal notranslate"><span class="pre">numpy</span></code> provides, making it fast and easy to perform numeric computations with python. We will show a quick sampler of some of the more commonly used functions so you can get an idea of what’s available.</p>
+<section id="array-creation-functions">
+<h2>Array creation functions<a class="headerlink" href="#array-creation-functions" title="Permalink to this headline">#</a></h2>
+<p>We’ve already seen the <code class="docutils literal notranslate"><span class="pre">np.ones</span></code> and <code class="docutils literal notranslate"><span class="pre">np.zeros</span></code> functions which create arrays filled with ones and zerose, respectively, but there are other handy functions for creating arrays that you might be interested in using:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">np.eye</span></code>: Creates the identity matrix.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.tri</span></code>: Creates a lower-tridiagonal matrix.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.arange</span></code>: A <code class="docutils literal notranslate"><span class="pre">numpy</span></code> counterpart to the built-in <code class="docutils literal notranslate"><span class="pre">range</span></code> function.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.linspace</span></code>: Similar to <code class="docutils literal notranslate"><span class="pre">np.arange</span></code>, except you can specify the number of elements, rather than the step between consecutive elements.</p></li>
+</ul>
+</section>
+<section id="array-transformation-functions">
+<h2>Array transformation functions<a class="headerlink" href="#array-transformation-functions" title="Permalink to this headline">#</a></h2>
+<p>You may have noticed in the <code class="docutils literal notranslate"><span class="pre">air_pressure_at_height</span></code> function we replaced the <code class="docutils literal notranslate"><span class="pre">math.exp</span></code> function call with <code class="docutils literal notranslate"><span class="pre">np.exp</span></code> - this is what we’ll call an “array transformation”. These types of functions take a numpy array as an input and then return a new array with the same shape but different values. This includes many of the common mathematical operations you’re already familiar with:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">np.exp</span></code>: Takes the exponential of the input array.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.log</span></code>: Takes the (natural) logarithm of the input array.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.sin</span></code>: Calculates the sine function on each element of the input array.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.abs</span></code>: Takes the absolute value of each element of the input array.</p></li>
+</ul>
+</section>
+<section id="aggregation-functions">
+<h2>Aggregation functions<a class="headerlink" href="#aggregation-functions" title="Permalink to this headline">#</a></h2>
+<p>We refer to functions which take an array as input and then returns either a scalar value, or another array with some reduced size (usually by removing one of the dimensions) as “aggregation functions”. Often, the default of these types of functions is to aggregate over the full array and return a scalar value, and if you only want to apply the aggregation along a certain dimension/axis you provide that explicitly as an additional argument. We’ll demonstrate this in a moment. For now, some commonly used aggregations are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">np.sum</span></code>: Takes the sum of elements of a given array.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.max</span></code>: Takes the maximum value of elements of a given array.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.histogram</span></code>: Calculates a histogram from a given array using a “bin counting” strategy.</p></li>
+</ul>
+<p>Of course, this is only a small sample of the available functionality within numpy and doesn’t cover many of the specialized “submodules” such as <code class="docutils literal notranslate"><span class="pre">np.linalg</span></code> for linear algebra functions (such as matrix decompositions), or <code class="docutils literal notranslate"><span class="pre">np.fft</span></code> for calculating Fourier transforms, and <code class="docutils literal notranslate"><span class="pre">np.random</span></code> for random number generation.</p>
+<p>Because we haven’t seen aggregation functions yet, we will take a moment to highlight how that part works for aggregations over full arrays and specific axes. We will use a contrived array, which is a 3x3 matrix whose entries increase linearly from 1 to 9 as defined below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an array of all zeros</span>
-<span class="n">zeros</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">array_shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">zeros</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then, we can take the total sum of the array in the obvious way:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sample_array</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0. 0. 0. 0. 0.]
- [0. 0. 0. 0. 0.]
- [0. 0. 0. 0. 0.]
- [0. 0. 0. 0. 0.]
- [0. 0. 0. 0. 0.]]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>45
 </pre></div>
 </div>
 </div>
 </div>
+<p>But, as we mentioned, aggregation functions can take arguments which apply the aggregation to specific axes. For instance, if we wanted to take the totals along each of the columns we would specify the <code class="docutils literal notranslate"><span class="pre">axis=0</span></code> argument as below:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Arange is just like the regular `range` function</span>
-<span class="c1"># but produces an array rather than a `range` object</span>
-<span class="n">sequence_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">sequence_1</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sample_array</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[    0     1     2 ... 19997 19998 19999]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([12, 15, 18])
 </pre></div>
 </div>
 </div>
 </div>
-<p>Linspace is the counterpart to <code class="docutils literal notranslate"><span class="pre">arange</span></code>. If you know
-how many numbers you need rather than the step size
-Here, 5 evenly spaced values form 0 to pi
-NOTE: Linspace actually includes the end point</p>
+<p>And similarly, we can take the sum across rows by specifying <code class="docutils literal notranslate"><span class="pre">axis=1</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sequence_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">sequence_2</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sample_array</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.         0.78539816 1.57079633 2.35619449 3.14159265]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 6, 15, 24])
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="you-can-create-random-numbers-too">
-<h1>You can create random numbers too<a class="headerlink" href="#you-can-create-random-numbers-too" title="Permalink to this headline">#</a></h1>
+<section id="array-indexing-and-slicing">
+<h3>Array indexing and slicing<a class="headerlink" href="#array-indexing-and-slicing" title="Permalink to this headline">#</a></h3>
+<p>This first taste of specifying axes to perform computation on is a key skill to have when using <code class="docutils literal notranslate"><span class="pre">numpy</span></code> for numerical calculations. From the above example in calculating sums we can see that <code class="docutils literal notranslate"><span class="pre">numpy</span></code> is a “row-major” array format. That is, the first index into a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array is along the rows, and the second is along columns. Of course, as you go into higher dimensions this intuition breaks down, but the key thing to keep in mind is to be careful which axes of your arrays you are operating on and being  diligent in making sure that your algorithms work as expected. Operating on array axes in the wrong order will often produce a result, but that doesn’t guarantee it is the correct one.</p>
+<p>To get more familiar with how indexing and slicing on array axes works let’s go over some of the basics. Much of what you already know from the basic python sequence types (recall, lists and tuples) will still hold with numpy arrays. For example, getting the first and last element of a 1-d array works exactly as you would expect.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">array_shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">random_matrix</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sequence_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+<span class="n">sequence_1</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.32872669 0.74190436 0.89967422 0.70792172 0.85745503]
- [0.16636774 0.73049498 0.01429831 0.69264688 0.85787575]
- [0.10928469 0.89127583 0.71306694 0.47980016 0.63634163]
- [0.49846996 0.1808572  0.99243232 0.23666436 0.12287594]
- [0.88821612 0.33983191 0.07941638 0.48600274 0.66432614]]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10])
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="numpy-is-really-good-for-linear-algebra">
-<h1>Numpy is really good for linear algebra<a class="headerlink" href="#numpy-is-really-good-for-linear-algebra" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vector_shape</span> <span class="o">=</span> <span class="n">array_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">random_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">vector_shape</span><span class="p">)</span>
-<span class="n">random_matrix_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">array_shape</span><span class="p">)</span>
-
-<span class="c1"># For example the dot product   </span>
-<span class="n">random_dot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">random_vector</span><span class="p">,</span> <span class="n">random_matrix_2</span><span class="p">)</span>
-
-<span class="c1"># Or matrix multiplication</span>
-<span class="n">random_matmul</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">random_matrix</span><span class="p">,</span> <span class="n">random_matrix_2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="and-there-are-a-ton-of-operations-you-can-usually-find-what-you-need-by-searching-online-for-numpy-whatever-function-you-want">
-<h1>And there are a ton of operations, you can usually find what you need by searching online for “numpy (whatever function you want)”<a class="headerlink" href="#and-there-are-a-ton-of-operations-you-can-usually-find-what-you-need-by-searching-online-for-numpy-whatever-function-you-want" title="Permalink to this headline">#</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">random_matrix</span><span class="p">)</span>
-<span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">random_matrix</span><span class="p">)</span>
-<span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">random_vector</span><span class="p">)</span>
-<span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">random_matmul</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First element: &quot;</span><span class="p">,</span> <span class="n">sequence_1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot; Last element: &quot;</span><span class="p">,</span> <span class="n">sequence_1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.655511462634199
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First element:  0
+ Last element:  10
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="finally-let-s-talk-about-slicing-and-indexing">
-<h1>Finally, let’s talk about slicing and indexing<a class="headerlink" href="#finally-let-s-talk-about-slicing-and-indexing" title="Permalink to this headline">#</a></h1>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="like-lists-you-can-index-arrays-directly">
-<h1>Like lists you can index arrays directly<a class="headerlink" href="#like-lists-you-can-index-arrays-directly" title="Permalink to this headline">#</a></h1>
+<p>And just like lists and tuples you can use the slicig operators either via the <code class="docutils literal notranslate"><span class="pre">start:stop:step</span></code> syntax or by creating the <code class="docutils literal notranslate"><span class="pre">slice</span></code> object explicitly.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sequence_1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">sequence_1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-
-<span class="c1"># You can also &quot;slice&quot; which is basically indexing</span>
-<span class="c1"># multiple values. The syntax for slicing is like so</span>
-<span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">stop</span> <span class="o">=</span> <span class="mi">5</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">stop</span> <span class="o">=</span> <span class="mi">8</span>
 <span class="n">step</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">sequence_1</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">:</span><span class="n">step</span><span class="p">])</span>
 
-<span class="c1"># Additionally you can create a `slice` object which</span>
-<span class="c1"># can be convenient because you can use it multiple times</span>
 <span class="n">my_slice</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">sequence_1</span><span class="p">[</span><span class="n">my_slice</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">sequence_2</span><span class="p">[</span><span class="n">my_slice</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 2 4]
-[0 2 4]
-[0.         1.57079633 3.14159265]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 2 4 6]
+[0 2 4 6]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Indexing on multidimensional arrays, however, works similarly to indexing on sequences or 1-d arrays, but the various axes are separated by commas inside of the brackets. For instance, to get the first row and column from our 2-d array you can do the following (recall indexing with <code class="docutils literal notranslate"><span class="pre">:</span></code> just means “get everything”):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   First row: &#39;</span><span class="p">,</span> <span class="n">sample_array</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First column: &#39;</span><span class="p">,</span> <span class="n">sample_array</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   First row:  [1 2 3]
+First column:  [1 4 7]
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="for-multidimensional-arrays-indexing-works-a-bit-differently">
-<h1>For multidimensional arrays indexing works a  bit differently<a class="headerlink" href="#for-multidimensional-arrays-indexing-works-a-bit-differently" title="Permalink to this headline">#</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">increasing_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span> <span class="c1">#reare for a 1 dim array to a  2 dim array</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">increasing_matrix</span><span class="p">)</span>
-<span class="c1">#indexing on a two dimientional array makes it </span>
-<span class="nb">print</span><span class="p">()</span>
-<span class="c1"># Get the first row</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">increasing_matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">()</span>
-<span class="c1"># Get the middle value</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">increasing_matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">()</span>
-<span class="c1"># Get the first column, the `:` means &quot;everything&quot;</span>
-<span class="c1"># It is equivalent to `slice(None, None, None)`</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">increasing_matrix</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0 1 2]
- [3 4 5]
- [6 7 8]]
-
-[0 1 2]
-
-5
-
-[0 3 6]
-</pre></div>
-</div>
-</div>
-</div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="arrays-can-be-of-large-dimension-up-to-i-think-64">
-<h1>Arrays can be of large dimension (up to, I think, 64)<a class="headerlink" href="#arrays-can-be-of-large-dimension-up-to-i-think-64" title="Permalink to this headline">#</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">length</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">dim</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="n">array_5d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">length</span><span class="o">**</span><span class="n">dim</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">dim</span> <span class="o">*</span> <span class="p">(</span><span class="n">length</span><span class="p">,))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">array_5d</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">array_5d</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3, 3, 3, 3, 3) 5
-</pre></div>
-</div>
-</div>
-</div>
-<p>Numpy also features some rudimentary ways of
-reading data from files. This is how you’ll complete
-your forecasting assignment. I’ve downloaded the daily
-streamflow in cubic feet per second for the last thirty
-days (ending Sept 10) and placed it in the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory.
-But because I posted it on GitHub we can open it directly
-over the internet.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/HAS-Tools-Fall2022&#39;</span>
-           <span class="s1">&#39;/Course-Materials22/main/data/verde_river_daily_flow_cfs.csv&#39;</span><span class="p">)</span>
-<span class="n">flows</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span>
-    <span class="n">filename</span><span class="p">,</span>           <span class="c1"># The location of the text file</span>
-    <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span>      <span class="c1"># character which splits data into groups</span>
-    <span class="n">usecols</span><span class="o">=</span><span class="mi">1</span>           <span class="c1"># Just take column 1, which is the flows</span>
-<span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">flows</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[136.  281.  234.  181.  224.  215.  209.  236.  645.  579.  417.  372.
- 295.  308.  395.  357.  276.  253.  202.  165.  140.  119.  102.   86.7
-  84.9  73.8  67.   63.   57.1  55.1]
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -933,7 +821,7 @@ over the internet.</p>
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./course_content/module_2_numpy_and_matplotlib"
         },
         predefinedOutput: true
@@ -948,11 +836,11 @@ over the internet.</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../module_1_intro_to_python/1_python_introduction.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../module_1_intro_to_python/2_python_stuff_you_should_know.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Introduction to python</p>
+            <p class="prev-next-title">Intermediate python - Or, stuff you should know</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="2_intro_to_matplotlib.html" title="next page">
