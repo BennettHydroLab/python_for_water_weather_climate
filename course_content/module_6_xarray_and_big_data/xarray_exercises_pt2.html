@@ -1,48 +1,59 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>xarray exercises pt 2: ENSO Analysis &#8212; Python for water, weather, and climate science</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -52,55 +63,86 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'course_content/module_6_xarray_and_big_data/xarray_exercises_pt2';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="prev" title="Intro to xarray" href="1_intro_to_xarray.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
     
-    <div class="container-fluid" id="banner"></div>
-
     
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../../index.html">
-      
-      
-      
-      <h1 class="site-logo" id="site-title">Python for water, weather, and climate science</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+<a class="navbar-brand logo" href="../../README.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Python for water, weather, and climate science</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -109,529 +151,265 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../module_1_intro_to_python/1_python_introduction.html">
-   Introduction to python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../module_1_intro_to_python/2_python_stuff_you_should_know.html">
-   Intermediate python - Or, stuff you should know
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../module_2_numpy_and_matplotlib/1_intro_to_numpy.html">
-   Introduction to numpy
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../module_2_numpy_and_matplotlib/2_intro_to_matplotlib.html">
-   Getting started with
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     matplotlib
-    </span>
-   </code>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../module_3_pandas_and_data_handling/1_intro_to_pandas.html">
-   Introduction to
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     pandas
-    </span>
-   </code>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../module_3_pandas_and_data_handling/2_apis_for_data_handling.html">
-   Some lessons on working with real world data: APIs and data wrangling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="1_intro_to_xarray.html">
-   Intro to
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     xarray
-    </span>
-   </code>
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     xarray
-    </span>
-   </code>
-   exercises pt 2: ENSO Analysis
-  </a>
- </li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 1 - Introduction to python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../module_1_intro_to_python/1_python_introduction.html">Introduction to python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../module_1_intro_to_python/2_python_stuff_you_should_know.html">Intermediate python - Or, stuff you should know</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../module_1_intro_to_python/exercises.html">Exercises for Module 1: Intro to Python</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 2 - Introduction to scientific python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../module_2_numpy_and_matplotlib/1_intro_to_numpy.html">Introduction to numpy</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../module_2_numpy_and_matplotlib/2_intro_to_matplotlib.html">Getting started with <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 3 - Working with real data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../module_3_pandas_and_data_handling/1_intro_to_pandas.html">Introduction to <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../module_3_pandas_and_data_handling/2_apis_for_data_handling.html">Some lessons on working with real world data: APIs and data wrangling</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 6 - Working with real climate data</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1_intro_to_xarray.html">Intro to <code class="docutils literal notranslate"><span class="pre">xarray</span></code></a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">xarray</span></code> exercises pt 2: ENSO Analysis</a></li>
+
+
+
+
+
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/course_content/module_6_xarray_and_big_data/xarray_exercises_pt2.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/course_content/module_6_xarray_and_big_data/xarray_exercises_pt2.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
 </div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../../_sources/course_content/module_6_xarray_and_big_data/xarray_exercises_pt2.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     xarray
-    </span>
-   </code>
-   exercises pt 2: ENSO Analysis
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#pulling-in-our-data">
-   Pulling in our data
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#step-1-plotting-seasonal-average-precipitations">
-   Step 1: Plotting seasonal average precipitations
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#part-1">
-     Part 1
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#part-2">
-     Part 2
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#part-3">
-     Part 3:
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#part-4">
-     Part 4:
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#your-response-below">
-       Your response below:
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#step-2-calculating-an-enso-index">
-   Step 2: Calculating an ENSO index
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     Part 1:
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     Part 2:
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     Part 3:
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
-     Part 4:
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#putting-step-2-together">
-     Putting step 2 together
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-3-merging-the-sst-and-precipitation-datasets">
-     Step 3: Merging the SST and Precipitation datasets
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id5">
-       Part 1:
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id6">
-       Part 2:
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id7">
-       Part 3:
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#step-4-how-does-the-enso-index-correspond-to-precipitation">
-   Step 4: How does the ENSO index correspond to precipitation?
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id8">
-     Part 1
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id9">
-     Part 2
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id10">
-     Part 3
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id11">
-     Part 4
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#reflections-and-next-steps">
-   Reflections and next steps
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>xarray exercises pt 2: ENSO Analysis</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     xarray
-    </span>
-   </code>
-   exercises pt 2: ENSO Analysis
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#pulling-in-our-data">
-   Pulling in our data
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#step-1-plotting-seasonal-average-precipitations">
-   Step 1: Plotting seasonal average precipitations
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#part-1">
-     Part 1
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#part-2">
-     Part 2
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#part-3">
-     Part 3:
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#part-4">
-     Part 4:
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#your-response-below">
-       Your response below:
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#step-2-calculating-an-enso-index">
-   Step 2: Calculating an ENSO index
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     Part 1:
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     Part 2:
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     Part 3:
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
-     Part 4:
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#putting-step-2-together">
-     Putting step 2 together
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-3-merging-the-sst-and-precipitation-datasets">
-     Step 3: Merging the SST and Precipitation datasets
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id5">
-       Part 1:
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id6">
-       Part 2:
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id7">
-       Part 3:
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#step-4-how-does-the-enso-index-correspond-to-precipitation">
-   Step 4: How does the ENSO index correspond to precipitation?
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id8">
-     Part 1
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id9">
-     Part 2
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id10">
-     Part 3
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id11">
-     Part 4
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#reflections-and-next-steps">
-   Reflections and next steps
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>xarray exercises pt 2: ENSO Analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><code class="docutils literal notranslate"><span class="pre">xarray</span></code> exercises pt 2: ENSO Analysis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pulling-in-our-data">Pulling in our data</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-plotting-seasonal-average-precipitations">Step 1: Plotting seasonal average precipitations</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1">Part 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2">Part 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3">Part 3:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-4">Part 4:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#your-response-below">Your response below:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-calculating-an-enso-index">Step 2: Calculating an ENSO index</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Part 1:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Part 2:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Part 3:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Part 4:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#putting-step-2-together">Putting step 2 together</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-merging-the-sst-and-precipitation-datasets">Step 3: Merging the SST and Precipitation datasets</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Part 1:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Part 2:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Part 3:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-how-does-the-enso-index-correspond-to-precipitation">Step 4: How does the ENSO index correspond to precipitation?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Part 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Part 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Part 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">Part 4</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#reflections-and-next-steps">Reflections and next steps</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="xarray-exercises-pt-2-enso-analysis">
-<h1><code class="docutils literal notranslate"><span class="pre">xarray</span></code> exercises pt 2: ENSO Analysis<a class="headerlink" href="#xarray-exercises-pt-2-enso-analysis" title="Permalink to this headline">#</a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">xarray</span></code> exercises pt 2: ENSO Analysis<a class="headerlink" href="#xarray-exercises-pt-2-enso-analysis" title="Permalink to this heading">#</a></h1>
 <p>Welcome, this is a Jupyter notebook containing your final coding assignment. In it, we will use data from  <a class="reference external" href="https://pangeo-forge.org/">Pangeo-Forge</a>.
 <a class="reference external" href="https://pangeo.io/">Pangeo</a> is a community platform for big data geoscience. We will use cloud-hosted datasets of global precipitation and sea surface temperatures to investigate the role of ENSO in monsoon precipitation in both Asia and the Southwest US.</p>
 <p>Before jumping into it, note that this “markdown cell” can be edited and you can see exactly how I added links and headers. The text in this markdown cell is not actually code that runs via python, but is added to the code cells for further explanation. This can be really helpful in your own work so that you can take notes and document your coding process. It’s also very helpful for tutorials as we saw before. Anyhow, now let’s jump in with some imports.</p>
@@ -660,7 +438,7 @@ title="Print to PDF"
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="pulling-in-our-data">
-<h1>Pulling in our data<a class="headerlink" href="#pulling-in-our-data" title="Permalink to this headline">#</a></h1>
+<h1>Pulling in our data<a class="headerlink" href="#pulling-in-our-data" title="Permalink to this heading">#</a></h1>
 <p>We will pull in precipitation data from <a class="reference external" href="https://www.ncei.noaa.gov/products/climate-data-records/precipitation-gpcp-daily">NOAA Daily Global Precipitation data</a> and sea surface temperature data from the <a class="reference external" href="https://climatedataguide.ucar.edu/climate-data/sst-data-hadisst-v11">Hadley Centre Global Sea Ice and Sea Surface Temperature</a>.</p>
 <p>To access the data all we need to do is put in the url to the dataset on Pangeo Forge. That can just get passed into xarray and we are good to go. Note this dataset is about 3.0 GB, and the file opens basically instantly. This is because xarray is lazy and only opens the metadata. Data will only be pulled in over the network when we actually do something with it.</p>
 <div class="cell docutils container">
@@ -1069,13 +847,13 @@ Attributes:
                     </tr>
                 </thead>
                 <tbody>
-
+                    
                     <tr>
                         <th> Bytes </th>
                         <td> 2.23 GiB </td>
                         <td> 49.44 MiB </td>
                     </tr>
-
+                    
                     <tr>
                         <th> Shape </th>
                         <td> (9226, 180, 360) </td>
@@ -1212,9 +990,9 @@ Attributes:
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="step-1-plotting-seasonal-average-precipitations">
-<h1>Step 1: Plotting seasonal average precipitations<a class="headerlink" href="#step-1-plotting-seasonal-average-precipitations" title="Permalink to this headline">#</a></h1>
+<h1>Step 1: Plotting seasonal average precipitations<a class="headerlink" href="#step-1-plotting-seasonal-average-precipitations" title="Permalink to this heading">#</a></h1>
 <section id="part-1">
-<h2>Part 1<a class="headerlink" href="#part-1" title="Permalink to this headline">#</a></h2>
+<h2>Part 1<a class="headerlink" href="#part-1" title="Permalink to this heading">#</a></h2>
 <p>Let’s begin by familiarizing ourselves with the precipitation data. To do so, let’s compute the seasonal average precipitation across the globe for the period of record (aka all times in the dataset).</p>
 <p>Your goal here is to group the <code class="docutils literal notranslate"><span class="pre">gpm</span></code> data by the <code class="docutils literal notranslate"><span class="pre">gpm['time'].dt.season</span></code> and compute the mean over the <code class="docutils literal notranslate"><span class="pre">time</span></code> dimension. The resulting dimensions of the new dataset should be <code class="docutils literal notranslate"><span class="pre">(season,</span> <span class="pre">latitude,</span> <span class="pre">longitude)</span></code>.</p>
 <div class="cell docutils container">
@@ -1611,13 +1389,13 @@ Attributes:
                     </tr>
                 </thead>
                 <tbody>
-
+                    
                     <tr>
                         <th> Bytes </th>
                         <td> 0.99 MiB </td>
                         <td> 253.12 kiB </td>
                     </tr>
-
+                    
                     <tr>
                         <th> Shape </th>
                         <td> (4, 180, 360) </td>
@@ -1714,7 +1492,7 @@ Attributes:
 </div>
 </section>
 <section id="part-2">
-<h2>Part 2<a class="headerlink" href="#part-2" title="Permalink to this headline">#</a></h2>
+<h2>Part 2<a class="headerlink" href="#part-2" title="Permalink to this heading">#</a></h2>
 <p>Now that you’ve got your dataset aggregated, let’s make a plot of what’s in it. For this one, we’ll use <code class="docutils literal notranslate"><span class="pre">xarray</span></code>’s built in plotting capability to make things easy. Call <code class="docutils literal notranslate"><span class="pre">.plot</span></code> on the <code class="docutils literal notranslate"><span class="pre">seasonal_precip</span></code> DataArray. Use the following arguments to make your plot nicer:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">col='season'</span></code>: Each season will be as separate column</p></li>
@@ -1734,12 +1512,12 @@ Attributes:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[########################################] | 100% Completed |  2min 49.7s
 </pre></div>
 </div>
-<img alt="../../_images/xarray_exercises_pt2_8_1.png" src="../../_images/xarray_exercises_pt2_8_1.png" />
+<img alt="../../_images/835dd42dda63a6dbbb6b157e0bb09cc404cf9706c3ad6e67107e0fe93e1cf6e5.png" src="../../_images/835dd42dda63a6dbbb6b157e0bb09cc404cf9706c3ad6e67107e0fe93e1cf6e5.png" />
 </div>
 </div>
 </section>
 <section id="part-3">
-<h2>Part 3:<a class="headerlink" href="#part-3" title="Permalink to this headline">#</a></h2>
+<h2>Part 3:<a class="headerlink" href="#part-3" title="Permalink to this heading">#</a></h2>
 <p>Hey! That looks like garbage!? Often times you’ll need to do some data cleanup before you can run your analysis, as “bad values” can ruin everything like we’ve seen above. To fix things, let’s create a <code class="docutils literal notranslate"><span class="pre">mask</span></code> variable which we will use to filter out really large values. Specifically, we want to select data when <code class="docutils literal notranslate"><span class="pre">gpm</span> <span class="pre">&lt;</span> <span class="pre">1000.0</span></code> and where <code class="docutils literal notranslate"><span class="pre">gpm</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>. You can join logical statements with the <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> operator, just like using <code class="docutils literal notranslate"><span class="pre">+</span></code> to add two arithmetic operations. Your only task here is to create the mask variable.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1763,32 +1541,32 @@ Attributes:
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.plot.facetgrid.FacetGrid at 0x7f926a172cb0&gt;
 </pre></div>
 </div>
-<img alt="../../_images/xarray_exercises_pt2_10_2.png" src="../../_images/xarray_exercises_pt2_10_2.png" />
+<img alt="../../_images/043c76327633e1341935217ffe89557ff067617f764128747875a9979a6ec215.png" src="../../_images/043c76327633e1341935217ffe89557ff067617f764128747875a9979a6ec215.png" />
 </div>
 </div>
 </section>
 <section id="part-4">
-<h2>Part 4:<a class="headerlink" href="#part-4" title="Permalink to this headline">#</a></h2>
+<h2>Part 4:<a class="headerlink" href="#part-4" title="Permalink to this heading">#</a></h2>
 <p>The plot from part 3 should now be a lot more interesting. Describe briefly what you’re seeing below.</p>
 <section id="your-response-below">
-<h3>Your response below:<a class="headerlink" href="#your-response-below" title="Permalink to this headline">#</a></h3>
+<h3>Your response below:<a class="headerlink" href="#your-response-below" title="Permalink to this heading">#</a></h3>
 <p>TODO</p>
 </section>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="step-2-calculating-an-enso-index">
-<h1>Step 2: Calculating an ENSO index<a class="headerlink" href="#step-2-calculating-an-enso-index" title="Permalink to this headline">#</a></h1>
+<h1>Step 2: Calculating an ENSO index<a class="headerlink" href="#step-2-calculating-an-enso-index" title="Permalink to this heading">#</a></h1>
 <p>We don’t have nearly enough time to get into the science, but briefly the El-Niño Southern Oscillation (ENSO) is a phenomena of periodic changes in the sea surface temperature and wind patterns in the eastern equatorial Pacific Ocean. This oscillation has strong impacts on many aspects of the climate system, including monsoonal precipitation patterns. The figure below shows a timeseries of sea surface temperature anomalies for this region. The dotted points are the actual data, black line is a smoothed average, and the shaded blue/red regions show prolonged deviations from the mean. We will first re-create a similar plot to this.</p>
 <p><img alt="image.png" src="https://upload.wikimedia.org/wikipedia/commons/0/02/Soi.svg" /></p>
 <p>To get from the global SST dataset to a timeseries of anomalies we will need 4 parts.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>First, select out the latitude range of <span class="math notranslate nohighlight">\((+5, -5)\)</span> and the longitude range of <span class="math notranslate nohighlight">\((-170, -150)\)</span> degrees. Note the sign ordering.</p></li>
 <li><p>Take the mean of this resulting <code class="docutils literal notranslate"><span class="pre">nino_ext</span></code> DataArray over the <code class="docutils literal notranslate"><span class="pre">['latitude',</span> <span class="pre">'longitude']</span></code> dimensions and assign this to <code class="docutils literal notranslate"><span class="pre">nino_sst</span></code>.</p></li>
 <li><p>Also calculating the mean over the <code class="docutils literal notranslate"><span class="pre">'time'</span></code> dimension from <code class="docutils literal notranslate"><span class="pre">nino_sst</span></code>. Assign this to <code class="docutils literal notranslate"><span class="pre">nino_mean</span></code></p></li>
 <li><p>Finally, compute the <code class="docutils literal notranslate"><span class="pre">nino_anomalies</span></code> by subtracting the <code class="docutils literal notranslate"><span class="pre">nino_mean</span></code> from <code class="docutils literal notranslate"><span class="pre">nino_sst</span></code></p></li>
 </ol>
 <section id="id1">
-<h2>Part 1:<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<h2>Part 1:<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <p>First, select out the latitude range of <span class="math notranslate nohighlight">\((+5, -5)\)</span> and the longitude range of <span class="math notranslate nohighlight">\((-170, -150)\)</span> degrees. Note the sign ordering.</p>
 <p>The resulting DataArray should have dimensions:</p>
 <ul class="simple">
@@ -2198,13 +1976,13 @@ Attributes:
                     </tr>
                 </thead>
                 <tbody>
-
+                    
                     <tr>
                         <th> Bytes </th>
                         <td> 1.40 MiB </td>
                         <td> 1.40 MiB </td>
                     </tr>
-
+                    
                     <tr>
                         <th> Shape </th>
                         <td> (1829, 10, 20) </td>
@@ -2300,7 +2078,7 @@ Attributes:
 </div>
 </section>
 <section id="id2">
-<h2>Part 2:<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<h2>Part 2:<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p>Take the mean of this resulting <code class="docutils literal notranslate"><span class="pre">nino_ext</span></code> DataArray over the <code class="docutils literal notranslate"><span class="pre">['latitude',</span> <span class="pre">'longitude']</span></code> dimensions and assign this to <code class="docutils literal notranslate"><span class="pre">nino_sst</span></code>.</p>
 <p>The resulting DataArray should only have a time dimension</p>
 <div class="cell docutils container">
@@ -2689,13 +2467,13 @@ Coordinates:
                     </tr>
                 </thead>
                 <tbody>
-
+                    
                     <tr>
                         <th> Bytes </th>
                         <td> 7.14 kiB </td>
                         <td> 7.14 kiB </td>
                     </tr>
-
+                    
                     <tr>
                         <th> Shape </th>
                         <td> (1829,) </td>
@@ -2770,12 +2548,12 @@ Coordinates:
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f926a014c10&gt;]
 </pre></div>
 </div>
-<img alt="../../_images/xarray_exercises_pt2_18_1.png" src="../../_images/xarray_exercises_pt2_18_1.png" />
+<img alt="../../_images/801fcf2847fca581cef9ecd274aa01b5cf74d932f3066ec36bc66f63d11be3a9.png" src="../../_images/801fcf2847fca581cef9ecd274aa01b5cf74d932f3066ec36bc66f63d11be3a9.png" />
 </div>
 </div>
 </section>
 <section id="id3">
-<h2>Part 3:<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<h2>Part 3:<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
 <p>Calculate the mean over the <code class="docutils literal notranslate"><span class="pre">'time'</span></code> dimension from <code class="docutils literal notranslate"><span class="pre">nino_sst</span></code>. Assign this to <code class="docutils literal notranslate"><span class="pre">nino_mean</span></code></p>
 <p>The resulting DataArray should have no dimensions, and a <code class="docutils literal notranslate"><span class="pre">shape</span></code> of <code class="docutils literal notranslate"><span class="pre">()</span></code></p>
 <div class="cell docutils container">
@@ -3162,13 +2940,13 @@ dask.array&lt;mean_agg-aggregate, shape=(), dtype=float32, chunksize=(), chunkty
                     </tr>
                 </thead>
                 <tbody>
-
+                    
                     <tr>
                         <th> Bytes </th>
                         <td> 4 B </td>
                         <td> 4.0 B </td>
                     </tr>
-
+                    
                     <tr>
                         <th> Shape </th>
                         <td> () </td>
@@ -3188,14 +2966,14 @@ dask.array&lt;mean_agg-aggregate, shape=(), dtype=float32, chunksize=(), chunkty
             </table>
         </td>
         <td>
-
+        
         </td>
     </tr>
 </table></div></div></li><li class='xr-section-item'><input id='section-e1a34609-223c-47ef-b509-a23aac92b7c0' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-e1a34609-223c-47ef-b509-a23aac92b7c0' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-d1df46a8-184e-4e30-b85a-3f4a7ce24a9a' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-d1df46a8-184e-4e30-b85a-3f4a7ce24a9a' class='xr-section-summary'  title='Expand/collapse section'>Indexes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-f3d9fba1-d0e5-4e29-95cf-8fd4089a8966' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-f3d9fba1-d0e5-4e29-95cf-8fd4089a8966' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 </section>
 <section id="id4">
-<h2>Part 4:<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<h2>Part 4:<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
 <p>Finally, compute the <code class="docutils literal notranslate"><span class="pre">nino_anomalies</span></code> by subtracting the <code class="docutils literal notranslate"><span class="pre">nino_mean</span></code> from <code class="docutils literal notranslate"><span class="pre">nino_sst</span></code></p>
 <p>The resulting DataArray should have dimensions of time only. Values should be both positive and negative. You can even check to ensure that the mean is close to 0</p>
 <div class="cell docutils container">
@@ -3586,13 +3364,13 @@ Coordinates:
                     </tr>
                 </thead>
                 <tbody>
-
+                    
                     <tr>
                         <th> Bytes </th>
                         <td> 7.14 kiB </td>
                         <td> 7.14 kiB </td>
                     </tr>
-
+                    
                     <tr>
                         <th> Shape </th>
                         <td> (1829,) </td>
@@ -4034,7 +3812,7 @@ array(True)</pre><div class='xr-wrap' style='display:none'><div class='xr-header
 </div>
 </section>
 <section id="putting-step-2-together">
-<h2>Putting step 2 together<a class="headerlink" href="#putting-step-2-together" title="Permalink to this headline">#</a></h2>
+<h2>Putting step 2 together<a class="headerlink" href="#putting-step-2-together" title="Permalink to this heading">#</a></h2>
 <p>If you’ve made it this far you should be able to run the following code cell to create a plot like the one shown at the beginning of Step 2. The plot won’t look exactly the same because we are using a different dataset, different region of aggregation, and different method of plotting the smoothed timeseries. But, you should be able to see a similarity in the ebb-and-flow of the ENSO signature that we’re plotting below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -4051,21 +3829,21 @@ array(True)</pre><div class='xr-wrap' style='display:none'><div class='xr-header
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f926a173010&gt;
 </pre></div>
 </div>
-<img alt="../../_images/xarray_exercises_pt2_25_1.png" src="../../_images/xarray_exercises_pt2_25_1.png" />
+<img alt="../../_images/3303fbbd178d4d293fcca6dcd2584751aac6280ca11d44e2ae271d572d565c81.png" src="../../_images/3303fbbd178d4d293fcca6dcd2584751aac6280ca11d44e2ae271d572d565c81.png" />
 </div>
 </div>
 </section>
 <section id="step-3-merging-the-sst-and-precipitation-datasets">
-<h2>Step 3: Merging the SST and Precipitation datasets<a class="headerlink" href="#step-3-merging-the-sst-and-precipitation-datasets" title="Permalink to this headline">#</a></h2>
+<h2>Step 3: Merging the SST and Precipitation datasets<a class="headerlink" href="#step-3-merging-the-sst-and-precipitation-datasets" title="Permalink to this heading">#</a></h2>
 <p>One of the fundamental skills for doing science on large datasets is being able to match up their temporal/spatial resolutions to facilitate analysis. Our two datasets have different time extents, time resolutions, and spatial resolutions. To be able to merge them together we’ll need to either reduce some of the data or match the spatiotemporal variablity.</p>
 <p>We’ve actually already taken care of one pieces of this by calculating the <code class="docutils literal notranslate"><span class="pre">nino_anomalies</span></code> in the previous step, which now simply has a <code class="docutils literal notranslate"><span class="pre">time</span></code> dimension at the monthly timescale. But there are still some loose ends. To clean them up you’ll need to complete 3 parts:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Match up the time extents for the <code class="docutils literal notranslate"><span class="pre">gpm</span></code> and <code class="docutils literal notranslate"><span class="pre">nino_anomalies</span></code> datasets.</p></li>
 <li><p>Match up the time stamps for the <code class="docutils literal notranslate"><span class="pre">gpm</span></code> and <code class="docutils literal notranslate"><span class="pre">nino_anomalies</span></code> datasets.</p></li>
 <li><p>Re-apply the masking technique from earlier to filter out bad precipitation data.</p></li>
 </ol>
 <section id="id5">
-<h3>Part 1:<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
+<h3>Part 1:<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
 <p>Find the first and last times in both the <code class="docutils literal notranslate"><span class="pre">gpm</span></code> and <code class="docutils literal notranslate"><span class="pre">nino_anomalies</span></code> datasets. These can be computed by calling the <code class="docutils literal notranslate"><span class="pre">min</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code> functions on the “time” dimension of each dataset, respectively. This cell should print out a single time slice with times starting in 1996 and ending in 2021.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -4104,7 +3882,7 @@ Attributes:
 </div>
 </section>
 <section id="id6">
-<h3>Part 2:<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
+<h3>Part 2:<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
 <p>Next, we’ll need to align the timestamps so that they fit together. To do so, I’ve set you up to select out the correct time slice from the previous part but you’ll need to do the <code class="docutils literal notranslate"><span class="pre">resample</span></code> to a monthly mean. This can be accomplished by calling the <code class="docutils literal notranslate"><span class="pre">resample</span></code> function with an argument which is a dictionary where the key is <code class="docutils literal notranslate"><span class="pre">'time'</span></code> and the <code class="docutils literal notranslate"><span class="pre">value</span></code> is <code class="docutils literal notranslate"><span class="pre">'1M'</span></code> (which means “one month”). Finally, after the call to resample you can compute the mean with the <code class="docutils literal notranslate"><span class="pre">mean</span></code> function. These <code class="docutils literal notranslate"><span class="pre">monthly_nino</span></code> and <code class="docutils literal notranslate"><span class="pre">monthly_gpm</span></code> variables should be able to be placed into the same dataset which has dims of <code class="docutils literal notranslate"><span class="pre">time</span></code>, <code class="docutils literal notranslate"><span class="pre">latitude</span></code>, and <code class="docutils literal notranslate"><span class="pre">longitude</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -4491,13 +4269,13 @@ Coordinates:
                     </tr>
                 </thead>
                 <tbody>
-
+                    
                     <tr>
                         <th> Bytes </th>
                         <td> 1.18 kiB </td>
                         <td> 4 B </td>
                     </tr>
-
+                    
                     <tr>
                         <th> Shape </th>
                         <td> (303,) </td>
@@ -4984,13 +4762,13 @@ Data variables:
                     </tr>
                 </thead>
                 <tbody>
-
+                    
                     <tr>
                         <th> Bytes </th>
                         <td> 1.18 kiB </td>
                         <td> 4 B </td>
                     </tr>
-
+                    
                     <tr>
                         <th> Shape </th>
                         <td> (303,) </td>
@@ -5059,13 +4837,13 @@ Data variables:
                     </tr>
                 </thead>
                 <tbody>
-
+                    
                     <tr>
                         <th> Bytes </th>
                         <td> 74.90 MiB </td>
                         <td> 253.12 kiB </td>
                     </tr>
-
+                    
                     <tr>
                         <th> Shape </th>
                         <td> (303, 180, 360) </td>
@@ -5184,7 +4962,7 @@ Data variables:
 </div>
 </section>
 <section id="id7">
-<h3>Part 3:<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
+<h3>Part 3:<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
 <p>Finally, you’ll need to mask out the same precipitation data as you did in Step 1 Part 3. This should yield a plot which has some meaningful patterns. This might take some time to complete, so you should make sure that the first code cell completes with no errors before attempting to run the second one.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -5598,13 +5376,13 @@ Data variables:
                     </tr>
                 </thead>
                 <tbody>
-
+                    
                     <tr>
                         <th> Bytes </th>
                         <td> 1.18 kiB </td>
                         <td> 4 B </td>
                     </tr>
-
+                    
                     <tr>
                         <th> Shape </th>
                         <td> (303,) </td>
@@ -5673,13 +5451,13 @@ Data variables:
                     </tr>
                 </thead>
                 <tbody>
-
+                    
                     <tr>
                         <th> Bytes </th>
                         <td> 74.90 MiB </td>
                         <td> 253.12 kiB </td>
                     </tr>
-
+                    
                     <tr>
                         <th> Shape </th>
                         <td> (303, 180, 360) </td>
@@ -5807,24 +5585,24 @@ Data variables:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[########################################] | 100% Completed |  3min  9.0s
 </pre></div>
 </div>
-<img alt="../../_images/xarray_exercises_pt2_33_1.png" src="../../_images/xarray_exercises_pt2_33_1.png" />
+<img alt="../../_images/352a95e48d57773a908b03721869b70a73419b6179dd24164ee890018ecb22e1.png" src="../../_images/352a95e48d57773a908b03721869b70a73419b6179dd24164ee890018ecb22e1.png" />
 </div>
 </div>
 </section>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="step-4-how-does-the-enso-index-correspond-to-precipitation">
-<h1>Step 4: How does the ENSO index correspond to precipitation?<a class="headerlink" href="#step-4-how-does-the-enso-index-correspond-to-precipitation" title="Permalink to this headline">#</a></h1>
+<h1>Step 4: How does the ENSO index correspond to precipitation?<a class="headerlink" href="#step-4-how-does-the-enso-index-correspond-to-precipitation" title="Permalink to this heading">#</a></h1>
 <p>We’re finally to the end of this thing! Now that you’ve got your precipitation data and ENSO signature on the same timestamp and filtered only to meaningful data it’s time to look at the correlations. We’ll first look at this for a particular region around Indonesia and then for the global context.</p>
 <p>This will happen in 4 parts.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>First, select out the latitude range <span class="math notranslate nohighlight">\((0, 10)\)</span> and longitude with range <span class="math notranslate nohighlight">\((100, 130)\)</span>, and take the spatial mean for the dataset <code class="docutils literal notranslate"><span class="pre">ds</span></code>.</p></li>
 <li><p>Once calculated, plot the two timeseries for the ENSO anomaly and precipitation on separate subplots.</p></li>
 <li><p>Make a scatter plot of the same variables.</p></li>
 <li><p>Finally, calculate the global correlation between the ENSO signature and precipitation timeseries and plot the correlation as a map.</p></li>
 </ol>
 <section id="id8">
-<h2>Part 1<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h2>
+<h2>Part 1<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
 <p>Here you should be familiar with using either the <code class="docutils literal notranslate"><span class="pre">range</span></code> or <code class="docutils literal notranslate"><span class="pre">slice</span></code> notation to set up the <code class="docutils literal notranslate"><span class="pre">sea_monsoon_lat</span></code> and <code class="docutils literal notranslate"><span class="pre">sea_monsoon_lon</span></code> variables. Just setting those up should be all you need to do, I’ve already put together the reduction to a spatial mean together for you inside of the <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">ProgressBar()</span></code> clause. This will probably take a minute or two to run.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -6314,7 +6092,7 @@ Data variables:
 </div>
 </section>
 <section id="id9">
-<h2>Part 2<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h2>
+<h2>Part 2<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
 <p>With the data calculated you just have to put the right timeseries on the subplots. This should be reminiscent of the previous assignment where you had to make similar subplots. Just make sure that you’re plotting both the <code class="docutils literal notranslate"><span class="pre">nino_anomalies</span></code> and <code class="docutils literal notranslate"><span class="pre">precip</span></code> variables on separate subplots and you should be good to go.</p>
 <p>When looking at the resulting plots, do you see any correlation between the two? Feel free to write your observations below, though it’s not necessary.</p>
 <div class="cell docutils container">
@@ -6329,12 +6107,12 @@ Data variables:
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f924d7edab0&gt;]
 </pre></div>
 </div>
-<img alt="../../_images/xarray_exercises_pt2_38_1.png" src="../../_images/xarray_exercises_pt2_38_1.png" />
+<img alt="../../_images/4cd86f6faa8cfdd0ce7c25e2c8ddb6ca46c83ea6d88bca9e310fde9e2a3b0e2b.png" src="../../_images/4cd86f6faa8cfdd0ce7c25e2c8ddb6ca46c83ea6d88bca9e310fde9e2a3b0e2b.png" />
 </div>
 </div>
 </section>
 <section id="id10">
-<h2>Part 3<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h2>
+<h2>Part 3<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
 <p>To confirm what you suspected from the previous plot let’s also do a scatter plot of it all. All you need to do here is fill in the variable names for <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -6348,12 +6126,12 @@ Data variables:
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7f924d57eaa0&gt;
 </pre></div>
 </div>
-<img alt="../../_images/xarray_exercises_pt2_40_1.png" src="../../_images/xarray_exercises_pt2_40_1.png" />
+<img alt="../../_images/c60feabd831c56cb7075f5bb6369492eeea23c015b8750f621cd4678f0c27f84.png" src="../../_images/c60feabd831c56cb7075f5bb6369492eeea23c015b8750f621cd4678f0c27f84.png" />
 </div>
 </div>
 </section>
 <section id="id11">
-<h2>Part 4<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h2>
+<h2>Part 4<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h2>
 <p>Finally, let’s bring out the big moves and compute the correlation between these SST anomalies and precipitation amounts. To do so, use the <code class="docutils literal notranslate"><span class="pre">xr.corr</span></code> method like we did in the last assignment and plot the resulting correlations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -6373,13 +6151,13 @@ Data variables:
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f924d77ab30&gt;
 </pre></div>
 </div>
-<img alt="../../_images/xarray_exercises_pt2_42_2.png" src="../../_images/xarray_exercises_pt2_42_2.png" />
+<img alt="../../_images/cf14bfa6a2f326adda8da1632f23febcb9347716f65b12740063e346cc9f4cb2.png" src="../../_images/cf14bfa6a2f326adda8da1632f23febcb9347716f65b12740063e346cc9f4cb2.png" />
 </div>
 </div>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="reflections-and-next-steps">
-<h1>Reflections and next steps<a class="headerlink" href="#reflections-and-next-steps" title="Permalink to this headline">#</a></h1>
+<h1>Reflections and next steps<a class="headerlink" href="#reflections-and-next-steps" title="Permalink to this heading">#</a></h1>
 <p>Before we part ways, write a sentence or two about the final plot you made above. Where does ENSO matter? Do you think this tells the whole story?</p>
 <p>Also, take a second to reflect on this. You’ve done some analysis here that is something that even the most savvy scientists wouldn’t have been able to do only a couple of decades ago. In this course I  hope you have been able to see ways that programming and data analysis techniques are able to inform your own work and that you continue to build these skills.</p>
 </section>
@@ -6404,43 +6182,130 @@ Data variables:
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="1_intro_to_xarray.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Intro to <code class="docutils literal notranslate"><span class="pre">xarray</span></code></p>
-        </div>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Andrew Bennett<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
-    
-</div>
 
-
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1_intro_to_xarray.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Intro to <code class="docutils literal notranslate"><span class="pre">xarray</span></code></p>
       </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><code class="docutils literal notranslate"><span class="pre">xarray</span></code> exercises pt 2: ENSO Analysis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pulling-in-our-data">Pulling in our data</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-plotting-seasonal-average-precipitations">Step 1: Plotting seasonal average precipitations</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1">Part 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2">Part 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3">Part 3:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-4">Part 4:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#your-response-below">Your response below:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-calculating-an-enso-index">Step 2: Calculating an ENSO index</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Part 1:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Part 2:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Part 3:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Part 4:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#putting-step-2-together">Putting step 2 together</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-merging-the-sst-and-precipitation-datasets">Step 3: Merging the SST and Precipitation datasets</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Part 1:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Part 2:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Part 3:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-how-does-the-enso-index-correspond-to-precipitation">Step 4: How does the ENSO index correspond to precipitation?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Part 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Part 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Part 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">Part 4</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#reflections-and-next-steps">Reflections and next steps</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Andrew Bennett
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
