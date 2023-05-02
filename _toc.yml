@@ -1,14 +1,33 @@
 # In _toc.yml
 format: jb-book
 root: README
-chapters:
-- file: course_content/module_1_intro_to_python/1_python_introduction.ipynb
-- file: course_content/module_1_intro_to_python/2_python_stuff_you_should_know.ipynb
-- file: course_content/module_2_numpy_and_matplotlib/1_intro_to_numpy.ipynb
-- file: course_content/module_2_numpy_and_matplotlib/2_intro_to_matplotlib.ipynb
-- file: course_content/module_3_pandas_and_data_handling/1_intro_to_pandas.ipynb
-- file: course_content/module_3_pandas_and_data_handling/2_apis_for_data_handling.ipynb
-- file: course_content/module_4_modeling_with_scikit_learn/1_intro_to_sklearn.ipynb
-- file: course_content/module_5_geopandas_for_gis/1_intro_to_geopandas.ipynb
-- file: course_content/module_6_xarray_and_big_data/1_intro_to_xarray.ipynb
-- file: course_content/module_6_xarray_and_big_data/xarray_exercises_pt2.ipynb
+parts:
+
+- caption: Module 1: Introduction to python
+  chapters:
+  - file: course_content/module_1_intro_to_python/1_python_introduction.ipynb
+  - file: course_content/module_1_intro_to_python/2_python_stuff_you_should_know.ipynb
+  - file: course_content/module_1_intro_to_python/exercises.ipynb
+
+- caption: Module 2: Introduction to scientific python
+  chapters:
+  - file: course_content/module_2_numpy_and_matplotlib/1_intro_to_numpy.ipynb
+  - file: course_content/module_2_numpy_and_matplotlib/2_intro_to_matplotlib.ipynb
+
+- caption: Module 3: Working with real data
+  chapters:
+  - file: course_content/module_3_pandas_and_data_handling/1_intro_to_pandas.ipynb
+  - file: course_content/module_3_pandas_and_data_handling/2_apis_for_data_handling.ipynb
+
+- caption: Module 4: Fundamentals of modeling with python
+  chapters
+  - file: course_content/module_4_modeling_with_scikit_learn/1_intro_to_sklearn.ipynb
+
+- caption: Module 5: Introduction to geospatial data
+  chapters
+  - file: course_content/module_5_geopandas_for_gis/1_intro_to_geopandas.ipynb
+
+- caption: Module 6: Working with real climate data
+  chapters
+  - file: course_content/module_6_xarray_and_big_data/1_intro_to_xarray.ipynb
+  - file: course_content/module_6_xarray_and_big_data/xarray_exercises_pt2.ipynb
