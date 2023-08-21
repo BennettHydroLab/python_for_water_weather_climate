@@ -1,7 +1,7 @@
 # Python for research in Water, Weather, and Climate
 ❗❗❗ Warning: This course is under active development. Many of the modules are currently lacking exposition and exercises. Check back for updates!
 
-This course is intended to introduce the basics of the modern data science stack for water, weather, and climate research. Folks from other Earth/environmental fields should also find useful lessons here. The content in this course is accessible via a [JupyterBook](https://arbennett.github.io/python_for_water_weather_climate/README.html) which can be browsed online. It is also availabe to be run in [GitHub Codespaces](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=565319270). This course is based off of content originally developed for the University of Arizona class HWRS 401/501 "Tools for Data Handling and Analysis in Water, Weather, & Climate" also known as "HAS Tools".
+This course is intended to introduce the basics of the modern data science stack for water, weather, and climate research. Folks from other Earth/environmental fields should also find useful lessons here. The content in this course is accessible via a [JupyterBook](https://bennetthydrolab.github.io/python_for_water_weather_climate/README.html) which can be browsed online. It is also availabe to be run in [GitHub Codespaces](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=565319270). This course is based off of content originally developed for the University of Arizona class HWRS 401/501 "Tools for Data Handling and Analysis in Water, Weather, & Climate" also known as "HAS Tools".
 
 ## Badges and other links for managing this courses materials.
 
