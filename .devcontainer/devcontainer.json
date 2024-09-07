@@ -4,6 +4,12 @@
 		"context": "..",
 		"dockerfile": "Dockerfile"
 	},
+        "extensions": [
+        	"ms-python.python",
+        	"ms-toolsai.jupyter",
+		"charliermarsh.ruff",
+		"catppuccin.catppuccin-vsc"
+        ],
 	//"features": {
 	//	"ghcr.io/devcontainers/features/conda:1": {}
 	//}
